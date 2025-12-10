@@ -47,6 +47,9 @@ set(PLUGIN_HEADERS
     src/dsp/Compressor.h
     src/dsp/Gate.h
     src/dsp/Limiter.h
+    src/dsp/MidSideProcessor.h
+    src/dsp/Oversampler.h
+    src/dsp/SidechainFilter.h
     src/utils/Parameters.h
     src/utils/SmoothValue.h
     src/utils/FFTProcessor.h

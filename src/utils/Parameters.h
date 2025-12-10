@@ -48,6 +48,16 @@ namespace ParamIDs {
     inline const juce::String limiterRelease = "limiterRelease";
     inline const juce::String limiterEnable  = "limiterEnable";
 
+    // Advanced DSP
+    inline const juce::String processingMode   = "processingMode";
+    inline const juce::String oversampling     = "oversampling";
+    
+    // Compressor Sidechain Filter
+    inline const juce::String scFilterMode     = "scFilterMode";
+    inline const juce::String scFilterFreq     = "scFilterFreq";
+    inline const juce::String scFilterQ        = "scFilterQ";
+    inline const juce::String scFilterListen   = "scFilterListen";
+
     // Helper function to get band-specific parameter ID
     inline juce::String getBandParamID(int bandIndex, const juce::String& param) {
         return "band" + juce::String(bandIndex) + "_" + param;
@@ -135,6 +145,7 @@ private:
     static void addCompressorParameters(juce::AudioProcessorValueTreeState::ParameterLayout& layout);
     static void addGateParameters(juce::AudioProcessorValueTreeState::ParameterLayout& layout);
     static void addLimiterParameters(juce::AudioProcessorValueTreeState::ParameterLayout& layout);
+    static void addAdvancedDSPParameters(juce::AudioProcessorValueTreeState::ParameterLayout& layout);
 };
 
 } // namespace SeshEQ

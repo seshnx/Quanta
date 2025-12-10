@@ -223,6 +223,37 @@ PluginEditor::PluginEditor(PluginProcessor& p)
     bypassAttach = std::make_unique<ButtonAttachment>(apvts, ParamIDs::bypass, bypassButton);
     
     //==========================================================================
+    // Advanced DSP controls
+    processingModeCombo.addItemList(juce::StringArray { "Stereo", "Mid/Side", "Left Only", "Right Only", "Mono" }, 1);
+    oversamplingCombo.addItemList(juce::StringArray { "Off", "2x", "4x", "8x" }, 1);
+    scFilterModeCombo.addItemList(juce::StringArray { "Off", "High Pass", "Low Pass", "Band Pass", "Tilt" }, 1);
+    
+    addAndMakeVisible(processingModeCombo);
+    addAndMakeVisible(oversamplingCombo);
+    addAndMakeVisible(scFilterModeCombo);
+    
+    setupSlider(scFilterFreqSlider);
+    setupSlider(scFilterQSlider);
+    addAndMakeVisible(scFilterFreqSlider);
+    addAndMakeVisible(scFilterQSlider);
+    addAndMakeVisible(scListenButton);
+    
+    setupLabel(processingModeLabel, "Mode");
+    setupLabel(oversamplingLabel, "OS");
+    setupLabel(scFilterLabel, "SC Filter");
+    
+    addAndMakeVisible(processingModeLabel);
+    addAndMakeVisible(oversamplingLabel);
+    addAndMakeVisible(scFilterLabel);
+    
+    processingModeAttach = std::make_unique<ComboAttachment>(apvts, ParamIDs::processingMode, processingModeCombo);
+    oversamplingAttach = std::make_unique<ComboAttachment>(apvts, ParamIDs::oversampling, oversamplingCombo);
+    scFilterModeAttach = std::make_unique<ComboAttachment>(apvts, ParamIDs::scFilterMode, scFilterModeCombo);
+    scFilterFreqAttach = std::make_unique<SliderAttachment>(apvts, ParamIDs::scFilterFreq, scFilterFreqSlider);
+    scFilterQAttach = std::make_unique<SliderAttachment>(apvts, ParamIDs::scFilterQ, scFilterQSlider);
+    scListenAttach = std::make_unique<ButtonAttachment>(apvts, ParamIDs::scFilterListen, scListenButton);
+    
+    //==========================================================================
     // Meters
     addAndMakeVisible(meterPanel);
     
@@ -334,18 +365,28 @@ void PluginEditor::resized() {
     auto meterArea = bottomArea.removeFromRight(200);
     meterPanel.setBounds(meterArea);
     
-    // Global controls next to meters
-    auto globalArea = bottomArea.removeFromRight(200).reduced(5, 0);
+    // Global and advanced DSP controls next to meters
+    auto globalArea = bottomArea.removeFromRight(280).reduced(5, 0);
     
-    auto globalRow = globalArea;
+    // Top row: Bypass and processing mode
+    auto topRow = globalArea.removeFromTop(50);
+    bypassButton.setBounds(topRow.removeFromLeft(70).reduced(2));
+    
+    topRow.removeFromLeft(5);
+    auto modeArea = topRow.removeFromLeft(100);
+    processingModeLabel.setBounds(modeArea.removeFromTop(14));
+    processingModeCombo.setBounds(modeArea.reduced(0, 2));
+    
+    topRow.removeFromLeft(5);
+    auto osArea = topRow;
+    oversamplingLabel.setBounds(osArea.removeFromTop(14));
+    oversamplingCombo.setBounds(osArea.reduced(0, 2));
+    
+    globalArea.removeFromTop(5);
+    
+    // Middle row: Input/Output/Mix knobs
+    auto knobRow = globalArea.removeFromTop(70);
     const int globalKnobWidth = 55;
-    
-    // Bypass button
-    bypassButton.setBounds(globalRow.removeFromTop(30).reduced(5, 2));
-    globalRow.removeFromTop(5);
-    
-    // Input/Output/Mix knobs
-    auto knobRow = globalRow;
     
     auto inputArea = knobRow.removeFromLeft(globalKnobWidth);
     inputLabel.setBounds(inputArea.removeFromTop(14));
@@ -362,6 +403,22 @@ void PluginEditor::resized() {
     auto mixArea = knobRow.removeFromLeft(globalKnobWidth);
     mixLabel.setBounds(mixArea.removeFromTop(14));
     dryWetSlider.setBounds(mixArea);
+    
+    globalArea.removeFromTop(5);
+    
+    // Bottom row: Sidechain filter
+    auto scRow = globalArea;
+    scFilterLabel.setBounds(scRow.removeFromTop(14));
+    
+    auto scControlRow = scRow.removeFromTop(28);
+    scFilterModeCombo.setBounds(scControlRow.removeFromLeft(90).reduced(0, 2));
+    scControlRow.removeFromLeft(5);
+    scListenButton.setBounds(scControlRow.removeFromLeft(70).reduced(0, 2));
+    
+    auto scKnobRow = scRow;
+    auto scFreqArea = scKnobRow.removeFromLeft(scKnobRow.getWidth() / 2);
+    scFilterFreqSlider.setBounds(scFreqArea);
+    scFilterQSlider.setBounds(scKnobRow);
     
     //==========================================================================
     // Dynamics controls (remaining space)

@@ -99,6 +99,19 @@ private:
     juce::Label inputLabel { {}, "IN" }, outputLabel { {}, "OUT" }, mixLabel { {}, "MIX" };
     
     //==============================================================================
+    // Advanced DSP controls
+    juce::ComboBox processingModeCombo;
+    juce::ComboBox oversamplingCombo;
+    juce::ComboBox scFilterModeCombo;
+    juce::Slider scFilterFreqSlider;
+    juce::Slider scFilterQSlider;
+    juce::ToggleButton scListenButton { "SC Listen" };
+    
+    juce::Label processingModeLabel { {}, "Mode" };
+    juce::Label oversamplingLabel { {}, "OS" };
+    juce::Label scFilterLabel { {}, "SC Filter" };
+    
+    //==============================================================================
     // Metering
     DynamicsMeterPanel meterPanel;
     
@@ -135,6 +148,12 @@ private:
     // Limiter
     std::unique_ptr<SliderAttachment> limiterCeilingAttach, limiterReleaseAttach;
     std::unique_ptr<ButtonAttachment> limiterEnableAttach;
+    
+    // Advanced DSP
+    std::unique_ptr<ComboAttachment> processingModeAttach, oversamplingAttach;
+    std::unique_ptr<ComboAttachment> scFilterModeAttach;
+    std::unique_ptr<SliderAttachment> scFilterFreqAttach, scFilterQAttach;
+    std::unique_ptr<ButtonAttachment> scListenAttach;
     
     //==============================================================================
     // Sizing

@@ -10,6 +10,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ParameterLayout::create() {
     addCompressorParameters(layout);
     addGateParameters(layout);
     addLimiterParameters(layout);
+    addAdvancedDSPParameters(layout);
     
     return layout;
 }
@@ -292,6 +293,63 @@ void ParameterLayout::addLimiterParameters(juce::AudioProcessorValueTreeState::P
     layout.add(std::make_unique<juce::AudioParameterBool>(
         juce::ParameterID(limiterEnable, 1),
         "Limiter Enable",
+        false
+    ));
+}
+
+void ParameterLayout::addAdvancedDSPParameters(juce::AudioProcessorValueTreeState::ParameterLayout& layout) {
+    using namespace ParamIDs;
+    
+    // Processing Mode: Stereo, Mid/Side, Left, Right, Mono
+    layout.add(std::make_unique<juce::AudioParameterChoice>(
+        juce::ParameterID(processingMode, 1),
+        "Processing Mode",
+        juce::StringArray { "Stereo", "Mid/Side", "Left Only", "Right Only", "Mono" },
+        0  // Default: Stereo
+    ));
+    
+    // Oversampling: Off, 2x, 4x, 8x
+    layout.add(std::make_unique<juce::AudioParameterChoice>(
+        juce::ParameterID(oversampling, 1),
+        "Oversampling",
+        juce::StringArray { "Off", "2x", "4x", "8x" },
+        0  // Default: Off
+    ));
+    
+    // Sidechain Filter Mode
+    layout.add(std::make_unique<juce::AudioParameterChoice>(
+        juce::ParameterID(scFilterMode, 1),
+        "SC Filter Mode",
+        juce::StringArray { "Off", "High Pass", "Low Pass", "Band Pass", "Tilt" },
+        0  // Default: Off
+    ));
+    
+    // Sidechain Filter Frequency
+    juce::NormalisableRange<float> freqRange(20.0f, 20000.0f);
+    freqRange.setSkewForCentre(500.0f);
+    layout.add(std::make_unique<juce::AudioParameterFloat>(
+        juce::ParameterID(scFilterFreq, 1),
+        "SC Filter Freq",
+        freqRange,
+        100.0f,
+        juce::AudioParameterFloatAttributes().withLabel("Hz")
+    ));
+    
+    // Sidechain Filter Q
+    juce::NormalisableRange<float> qRange(0.1f, 10.0f, 0.01f);
+    qRange.setSkewForCentre(1.0f);
+    layout.add(std::make_unique<juce::AudioParameterFloat>(
+        juce::ParameterID(scFilterQ, 1),
+        "SC Filter Q",
+        qRange,
+        1.0f,
+        juce::AudioParameterFloatAttributes()
+    ));
+    
+    // Sidechain Listen (monitor the filtered sidechain)
+    layout.add(std::make_unique<juce::AudioParameterBool>(
+        juce::ParameterID(scFilterListen, 1),
+        "SC Listen",
         false
     ));
 }

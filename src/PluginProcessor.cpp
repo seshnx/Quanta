@@ -15,6 +15,14 @@ PluginProcessor::PluginProcessor()
     dryWetParam = apvts.getRawParameterValue(ParamIDs::dryWet);
     bypassParam = apvts.getRawParameterValue(ParamIDs::bypass);
     
+    // Advanced DSP parameters
+    processingModeParam = apvts.getRawParameterValue(ParamIDs::processingMode);
+    oversamplingParam = apvts.getRawParameterValue(ParamIDs::oversampling);
+    scFilterModeParam = apvts.getRawParameterValue(ParamIDs::scFilterMode);
+    scFilterFreqParam = apvts.getRawParameterValue(ParamIDs::scFilterFreq);
+    scFilterQParam = apvts.getRawParameterValue(ParamIDs::scFilterQ);
+    scFilterListenParam = apvts.getRawParameterValue(ParamIDs::scFilterListen);
+    
     // Connect DSP processors to parameters
     eqProcessor.connectToParameters(apvts);
     compressor.connectToParameters(apvts);
@@ -73,6 +81,14 @@ void PluginProcessor::prepareToPlay(double sampleRate, int samplesPerBlock) {
     compressor.prepare(sampleRate, samplesPerBlock);
     gate.prepare(sampleRate, samplesPerBlock);
     limiter.prepare(sampleRate, samplesPerBlock);
+    
+    // Prepare advanced DSP
+    sidechainFilter.prepare(sampleRate);
+    
+    // Prepare oversampler (2 channels, with current factor)
+    auto osMode = oversamplingParam ? static_cast<OversamplingFactor>(static_cast<int>(oversamplingParam->load()))
+                                     : OversamplingFactor::None;
+    oversampler.prepare(2, samplesPerBlock, osMode);
     
     // Prepare FFT analyzer
     fftProcessor.prepare(sampleRate);
@@ -135,6 +151,17 @@ void PluginProcessor::processBlock(juce::AudioBuffer<float>& buffer,
     gate.updateFromParameters();
     limiter.updateFromParameters();
     
+    // Update advanced DSP parameters
+    if (processingModeParam)
+        midSideProcessor.setMode(static_cast<ProcessingMode>(static_cast<int>(processingModeParam->load())));
+    
+    if (scFilterModeParam)
+        sidechainFilter.setMode(static_cast<SidechainFilterMode>(static_cast<int>(scFilterModeParam->load())));
+    if (scFilterFreqParam)
+        sidechainFilter.setFrequency(scFilterFreqParam->load());
+    if (scFilterQParam)
+        sidechainFilter.setQ(scFilterQParam->load());
+    
     // Update gain targets
     if (inputGainParam)
         inputGainSmoother.setTargetDb(inputGainParam->load());
@@ -169,6 +196,9 @@ void PluginProcessor::processBlock(juce::AudioBuffer<float>& buffer,
     // Push pre-EQ samples to FFT analyzer
     fftProcessor.pushPreSamples(buffer);
     
+    // Apply Mid/Side encoding if enabled
+    midSideProcessor.prepareBuffer(buffer);
+    
     // Process EQ
     eqProcessor.process(buffer);
     
@@ -176,6 +206,9 @@ void PluginProcessor::processBlock(juce::AudioBuffer<float>& buffer,
     compressor.process(buffer);
     gate.process(buffer);
     limiter.process(buffer);
+    
+    // Apply Mid/Side decoding if enabled
+    midSideProcessor.finalizeBuffer(buffer);
     
     // Apply output gain
     for (int i = 0; i < numSamples; ++i) {

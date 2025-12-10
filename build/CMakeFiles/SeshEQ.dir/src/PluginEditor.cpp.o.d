@@ -731,7 +731,8 @@ CMakeFiles/SeshEQ.dir/src/PluginEditor.cpp.o: \
  /workspace/src/dsp/BiquadFilter.h /workspace/src/utils/Parameters.h \
  /workspace/src/utils/SmoothValue.h /workspace/src/dsp/Compressor.h \
  /workspace/src/dsp/LevelDetector.h /workspace/src/dsp/Gate.h \
- /workspace/src/dsp/Limiter.h /workspace/src/utils/FFTProcessor.h \
+ /workspace/src/dsp/Limiter.h /workspace/src/dsp/MidSideProcessor.h \
+ /workspace/src/dsp/Oversampler.h \
  /workspace/build/_deps/juce-src/modules/juce_dsp/juce_dsp.h \
  /workspace/build/_deps/juce-src/modules/juce_audio_formats/juce_audio_formats.h \
  /workspace/build/_deps/juce-src/modules/juce_audio_formats/format/juce_AudioFormatReader.h \
@@ -896,5 +897,6 @@ CMakeFiles/SeshEQ.dir/src/PluginEditor.cpp.o: \
  /workspace/build/_deps/juce-src/modules/juce_dsp/widgets/juce_Limiter.h \
  /workspace/build/_deps/juce-src/modules/juce_dsp/widgets/juce_Phaser.h \
  /workspace/build/_deps/juce-src/modules/juce_dsp/widgets/juce_Chorus.h \
+ /workspace/src/dsp/SidechainFilter.h /workspace/src/utils/FFTProcessor.h \
  /workspace/src/ui/SpectrumAnalyzer.h /workspace/src/ui/EQCurveDisplay.h \
  /workspace/src/ui/MeterComponent.h /workspace/src/ui/LookAndFeel.h

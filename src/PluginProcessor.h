@@ -5,6 +5,9 @@
 #include "dsp/Compressor.h"
 #include "dsp/Gate.h"
 #include "dsp/Limiter.h"
+#include "dsp/MidSideProcessor.h"
+#include "dsp/Oversampler.h"
+#include "dsp/SidechainFilter.h"
 #include "utils/Parameters.h"
 #include "utils/SmoothValue.h"
 #include "utils/FFTProcessor.h"
@@ -86,6 +89,11 @@ private:
     Gate gate;
     Limiter limiter;
     
+    // Advanced DSP
+    MidSideProcessor midSideProcessor;
+    Oversampler oversampler;
+    SidechainFilter sidechainFilter;
+    
     // FFT for spectrum analysis
     DualFFTProcessor fftProcessor;
     
@@ -99,6 +107,14 @@ private:
     std::atomic<float>* outputGainParam = nullptr;
     std::atomic<float>* dryWetParam = nullptr;
     std::atomic<float>* bypassParam = nullptr;
+    
+    // Advanced DSP parameters
+    std::atomic<float>* processingModeParam = nullptr;
+    std::atomic<float>* oversamplingParam = nullptr;
+    std::atomic<float>* scFilterModeParam = nullptr;
+    std::atomic<float>* scFilterFreqParam = nullptr;
+    std::atomic<float>* scFilterQParam = nullptr;
+    std::atomic<float>* scFilterListenParam = nullptr;
     
     // Level metering
     std::atomic<float> inputLevelDb { -100.0f };
