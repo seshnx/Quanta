@@ -1,0 +1,5 @@
+if(EXISTS "/workspace/build/SeshEQ_Tests[1]_tests.cmake")
+  include("/workspace/build/SeshEQ_Tests[1]_tests.cmake")
+else()
+  add_test(SeshEQ_Tests_NOT_BUILT SeshEQ_Tests_NOT_BUILT)
+endif()
