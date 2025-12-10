@@ -1076,6 +1076,126 @@ src/dsp/Limiter.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/dsp/Limiter.cpp.s
 .PHONY : src/dsp/Limiter.cpp.s
 
+src/ui/EQCurveDisplay.o: src/ui/EQCurveDisplay.cpp.o
+.PHONY : src/ui/EQCurveDisplay.o
+
+# target to build an object file
+src/ui/EQCurveDisplay.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.o
+.PHONY : src/ui/EQCurveDisplay.cpp.o
+
+src/ui/EQCurveDisplay.i: src/ui/EQCurveDisplay.cpp.i
+.PHONY : src/ui/EQCurveDisplay.i
+
+# target to preprocess a source file
+src/ui/EQCurveDisplay.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.i
+.PHONY : src/ui/EQCurveDisplay.cpp.i
+
+src/ui/EQCurveDisplay.s: src/ui/EQCurveDisplay.cpp.s
+.PHONY : src/ui/EQCurveDisplay.s
+
+# target to generate assembly for a file
+src/ui/EQCurveDisplay.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.s
+.PHONY : src/ui/EQCurveDisplay.cpp.s
+
+src/ui/LookAndFeel.o: src/ui/LookAndFeel.cpp.o
+.PHONY : src/ui/LookAndFeel.o
+
+# target to build an object file
+src/ui/LookAndFeel.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.o
+.PHONY : src/ui/LookAndFeel.cpp.o
+
+src/ui/LookAndFeel.i: src/ui/LookAndFeel.cpp.i
+.PHONY : src/ui/LookAndFeel.i
+
+# target to preprocess a source file
+src/ui/LookAndFeel.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.i
+.PHONY : src/ui/LookAndFeel.cpp.i
+
+src/ui/LookAndFeel.s: src/ui/LookAndFeel.cpp.s
+.PHONY : src/ui/LookAndFeel.s
+
+# target to generate assembly for a file
+src/ui/LookAndFeel.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.s
+.PHONY : src/ui/LookAndFeel.cpp.s
+
+src/ui/MeterComponent.o: src/ui/MeterComponent.cpp.o
+.PHONY : src/ui/MeterComponent.o
+
+# target to build an object file
+src/ui/MeterComponent.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.o
+.PHONY : src/ui/MeterComponent.cpp.o
+
+src/ui/MeterComponent.i: src/ui/MeterComponent.cpp.i
+.PHONY : src/ui/MeterComponent.i
+
+# target to preprocess a source file
+src/ui/MeterComponent.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.i
+.PHONY : src/ui/MeterComponent.cpp.i
+
+src/ui/MeterComponent.s: src/ui/MeterComponent.cpp.s
+.PHONY : src/ui/MeterComponent.s
+
+# target to generate assembly for a file
+src/ui/MeterComponent.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.s
+.PHONY : src/ui/MeterComponent.cpp.s
+
+src/ui/SpectrumAnalyzer.o: src/ui/SpectrumAnalyzer.cpp.o
+.PHONY : src/ui/SpectrumAnalyzer.o
+
+# target to build an object file
+src/ui/SpectrumAnalyzer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.o
+.PHONY : src/ui/SpectrumAnalyzer.cpp.o
+
+src/ui/SpectrumAnalyzer.i: src/ui/SpectrumAnalyzer.cpp.i
+.PHONY : src/ui/SpectrumAnalyzer.i
+
+# target to preprocess a source file
+src/ui/SpectrumAnalyzer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.i
+.PHONY : src/ui/SpectrumAnalyzer.cpp.i
+
+src/ui/SpectrumAnalyzer.s: src/ui/SpectrumAnalyzer.cpp.s
+.PHONY : src/ui/SpectrumAnalyzer.s
+
+# target to generate assembly for a file
+src/ui/SpectrumAnalyzer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.s
+.PHONY : src/ui/SpectrumAnalyzer.cpp.s
+
+src/utils/FFTProcessor.o: src/utils/FFTProcessor.cpp.o
+.PHONY : src/utils/FFTProcessor.o
+
+# target to build an object file
+src/utils/FFTProcessor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.o
+.PHONY : src/utils/FFTProcessor.cpp.o
+
+src/utils/FFTProcessor.i: src/utils/FFTProcessor.cpp.i
+.PHONY : src/utils/FFTProcessor.i
+
+# target to preprocess a source file
+src/utils/FFTProcessor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.i
+.PHONY : src/utils/FFTProcessor.cpp.i
+
+src/utils/FFTProcessor.s: src/utils/FFTProcessor.cpp.s
+.PHONY : src/utils/FFTProcessor.s
+
+# target to generate assembly for a file
+src/utils/FFTProcessor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.s
+.PHONY : src/utils/FFTProcessor.cpp.s
+
 src/utils/Parameters.o: src/utils/Parameters.cpp.o
 .PHONY : src/utils/Parameters.o
 
@@ -1264,6 +1384,21 @@ help:
 	@echo "... src/dsp/Limiter.o"
 	@echo "... src/dsp/Limiter.i"
 	@echo "... src/dsp/Limiter.s"
+	@echo "... src/ui/EQCurveDisplay.o"
+	@echo "... src/ui/EQCurveDisplay.i"
+	@echo "... src/ui/EQCurveDisplay.s"
+	@echo "... src/ui/LookAndFeel.o"
+	@echo "... src/ui/LookAndFeel.i"
+	@echo "... src/ui/LookAndFeel.s"
+	@echo "... src/ui/MeterComponent.o"
+	@echo "... src/ui/MeterComponent.i"
+	@echo "... src/ui/MeterComponent.s"
+	@echo "... src/ui/SpectrumAnalyzer.o"
+	@echo "... src/ui/SpectrumAnalyzer.i"
+	@echo "... src/ui/SpectrumAnalyzer.s"
+	@echo "... src/utils/FFTProcessor.o"
+	@echo "... src/utils/FFTProcessor.i"
+	@echo "... src/utils/FFTProcessor.s"
 	@echo "... src/utils/Parameters.o"
 	@echo "... src/utils/Parameters.i"
 	@echo "... src/utils/Parameters.s"

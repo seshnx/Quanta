@@ -195,10 +195,80 @@ CMakeFiles/SeshEQ.dir/src/utils/Parameters.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SeshEQ.dir/src/utils/Parameters.cpp.s"
 	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /workspace/src/utils/Parameters.cpp -o CMakeFiles/SeshEQ.dir/src/utils/Parameters.cpp.s
 
+CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
+CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.o: /workspace/src/utils/FFTProcessor.cpp
+CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.o"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.o -MF CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.o.d -o CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.o -c /workspace/src/utils/FFTProcessor.cpp
+
+CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.i"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /workspace/src/utils/FFTProcessor.cpp > CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.i
+
+CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.s"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /workspace/src/utils/FFTProcessor.cpp -o CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.s
+
+CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
+CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.o: /workspace/src/ui/SpectrumAnalyzer.cpp
+CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.o"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.o -MF CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.o.d -o CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.o -c /workspace/src/ui/SpectrumAnalyzer.cpp
+
+CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.i"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /workspace/src/ui/SpectrumAnalyzer.cpp > CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.i
+
+CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.s"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /workspace/src/ui/SpectrumAnalyzer.cpp -o CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.s
+
+CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
+CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.o: /workspace/src/ui/EQCurveDisplay.cpp
+CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.o"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.o -MF CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.o.d -o CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.o -c /workspace/src/ui/EQCurveDisplay.cpp
+
+CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.i"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /workspace/src/ui/EQCurveDisplay.cpp > CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.i
+
+CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.s"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /workspace/src/ui/EQCurveDisplay.cpp -o CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.s
+
+CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
+CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.o: /workspace/src/ui/MeterComponent.cpp
+CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.o"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.o -MF CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.o.d -o CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.o -c /workspace/src/ui/MeterComponent.cpp
+
+CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.i"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /workspace/src/ui/MeterComponent.cpp > CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.i
+
+CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.s"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /workspace/src/ui/MeterComponent.cpp -o CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.s
+
+CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
+CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.o: /workspace/src/ui/LookAndFeel.cpp
+CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.o"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.o -MF CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.o.d -o CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.o -c /workspace/src/ui/LookAndFeel.cpp
+
+CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.i"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /workspace/src/ui/LookAndFeel.cpp > CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.i
+
+CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.s"
+	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /workspace/src/ui/LookAndFeel.cpp -o CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.s
+
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors.cpp.o: _deps/juce-src/modules/juce_audio_processors/juce_audio_processors.cpp
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors.cpp.o"
 	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors.cpp.o -MF CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors.cpp.o.d -o CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors.cpp.o -c /workspace/build/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors.cpp
 
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors.cpp.i: cmake_force
@@ -212,7 +282,7 @@ CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_pr
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o: _deps/juce-src/modules/juce_audio_processors/juce_audio_processors_ara.cpp
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o"
 	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o -MF CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o.d -o CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o -c /workspace/build/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_ara.cpp
 
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_ara.cpp.i: cmake_force
@@ -226,7 +296,7 @@ CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_pr
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o: _deps/juce-src/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o"
 	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o -MF CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o.d -o CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o -c /workspace/build/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp
 
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.i: cmake_force
@@ -240,7 +310,7 @@ CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_pr
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_extra/juce_gui_extra.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_extra/juce_gui_extra.cpp.o: _deps/juce-src/modules/juce_gui_extra/juce_gui_extra.cpp
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_extra/juce_gui_extra.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_extra/juce_gui_extra.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_extra/juce_gui_extra.cpp.o"
 	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_extra/juce_gui_extra.cpp.o -MF CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_extra/juce_gui_extra.cpp.o.d -o CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_extra/juce_gui_extra.cpp.o -c /workspace/build/_deps/juce-src/modules/juce_gui_extra/juce_gui_extra.cpp
 
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_extra/juce_gui_extra.cpp.i: cmake_force
@@ -254,7 +324,7 @@ CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_extra/juce_gui_extra.cpp.s
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_basics/juce_gui_basics.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_basics/juce_gui_basics.cpp.o: _deps/juce-src/modules/juce_gui_basics/juce_gui_basics.cpp
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_basics/juce_gui_basics.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_basics/juce_gui_basics.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_basics/juce_gui_basics.cpp.o"
 	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_basics/juce_gui_basics.cpp.o -MF CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_basics/juce_gui_basics.cpp.o.d -o CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_basics/juce_gui_basics.cpp.o -c /workspace/build/_deps/juce-src/modules/juce_gui_basics/juce_gui_basics.cpp
 
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_basics/juce_gui_basics.cpp.i: cmake_force
@@ -268,7 +338,7 @@ CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_gui_basics/juce_gui_basics.cpp
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_graphics/juce_graphics.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_graphics/juce_graphics.cpp.o: _deps/juce-src/modules/juce_graphics/juce_graphics.cpp
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_graphics/juce_graphics.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_graphics/juce_graphics.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_graphics/juce_graphics.cpp.o"
 	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_graphics/juce_graphics.cpp.o -MF CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_graphics/juce_graphics.cpp.o.d -o CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_graphics/juce_graphics.cpp.o -c /workspace/build/_deps/juce-src/modules/juce_graphics/juce_graphics.cpp
 
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_graphics/juce_graphics.cpp.i: cmake_force
@@ -282,7 +352,7 @@ CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_graphics/juce_graphics.cpp.s: 
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_events/juce_events.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_events/juce_events.cpp.o: _deps/juce-src/modules/juce_events/juce_events.cpp
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_events/juce_events.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_events/juce_events.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_events/juce_events.cpp.o"
 	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_events/juce_events.cpp.o -MF CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_events/juce_events.cpp.o.d -o CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_events/juce_events.cpp.o -c /workspace/build/_deps/juce-src/modules/juce_events/juce_events.cpp
 
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_events/juce_events.cpp.i: cmake_force
@@ -296,7 +366,7 @@ CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_events/juce_events.cpp.s: cmak
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_core/juce_core.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_core/juce_core.cpp.o: _deps/juce-src/modules/juce_core/juce_core.cpp
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_core/juce_core.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_core/juce_core.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_core/juce_core.cpp.o"
 	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_core/juce_core.cpp.o -MF CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_core/juce_core.cpp.o.d -o CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_core/juce_core.cpp.o -c /workspace/build/_deps/juce-src/modules/juce_core/juce_core.cpp
 
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_core/juce_core.cpp.i: cmake_force
@@ -310,7 +380,7 @@ CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_core/juce_core.cpp.s: cmake_fo
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_data_structures/juce_data_structures.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_data_structures/juce_data_structures.cpp.o: _deps/juce-src/modules/juce_data_structures/juce_data_structures.cpp
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_data_structures/juce_data_structures.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_data_structures/juce_data_structures.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_data_structures/juce_data_structures.cpp.o"
 	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_data_structures/juce_data_structures.cpp.o -MF CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_data_structures/juce_data_structures.cpp.o.d -o CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_data_structures/juce_data_structures.cpp.o -c /workspace/build/_deps/juce-src/modules/juce_data_structures/juce_data_structures.cpp
 
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_data_structures/juce_data_structures.cpp.i: cmake_force
@@ -324,7 +394,7 @@ CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_data_structures/juce_data_stru
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_basics/juce_audio_basics.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_basics/juce_audio_basics.cpp.o: _deps/juce-src/modules/juce_audio_basics/juce_audio_basics.cpp
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_basics/juce_audio_basics.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_basics/juce_audio_basics.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_basics/juce_audio_basics.cpp.o"
 	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_basics/juce_audio_basics.cpp.o -MF CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_basics/juce_audio_basics.cpp.o.d -o CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_basics/juce_audio_basics.cpp.o -c /workspace/build/_deps/juce-src/modules/juce_audio_basics/juce_audio_basics.cpp
 
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_basics/juce_audio_basics.cpp.i: cmake_force
@@ -338,7 +408,7 @@ CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_basics/juce_audio_basics
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_utils/juce_audio_utils.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_utils/juce_audio_utils.cpp.o: _deps/juce-src/modules/juce_audio_utils/juce_audio_utils.cpp
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_utils/juce_audio_utils.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_utils/juce_audio_utils.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_utils/juce_audio_utils.cpp.o"
 	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_utils/juce_audio_utils.cpp.o -MF CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_utils/juce_audio_utils.cpp.o.d -o CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_utils/juce_audio_utils.cpp.o -c /workspace/build/_deps/juce-src/modules/juce_audio_utils/juce_audio_utils.cpp
 
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_utils/juce_audio_utils.cpp.i: cmake_force
@@ -352,7 +422,7 @@ CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_utils/juce_audio_utils.c
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_formats/juce_audio_formats.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_formats/juce_audio_formats.cpp.o: _deps/juce-src/modules/juce_audio_formats/juce_audio_formats.cpp
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_formats/juce_audio_formats.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_formats/juce_audio_formats.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_formats/juce_audio_formats.cpp.o"
 	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_formats/juce_audio_formats.cpp.o -MF CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_formats/juce_audio_formats.cpp.o.d -o CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_formats/juce_audio_formats.cpp.o -c /workspace/build/_deps/juce-src/modules/juce_audio_formats/juce_audio_formats.cpp
 
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_formats/juce_audio_formats.cpp.i: cmake_force
@@ -366,7 +436,7 @@ CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_formats/juce_audio_forma
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_devices/juce_audio_devices.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_devices/juce_audio_devices.cpp.o: _deps/juce-src/modules/juce_audio_devices/juce_audio_devices.cpp
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_devices/juce_audio_devices.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_devices/juce_audio_devices.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_devices/juce_audio_devices.cpp.o"
 	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_devices/juce_audio_devices.cpp.o -MF CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_devices/juce_audio_devices.cpp.o.d -o CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_devices/juce_audio_devices.cpp.o -c /workspace/build/_deps/juce-src/modules/juce_audio_devices/juce_audio_devices.cpp
 
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_devices/juce_audio_devices.cpp.i: cmake_force
@@ -380,7 +450,7 @@ CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_devices/juce_audio_devic
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_dsp/juce_dsp.cpp.o: CMakeFiles/SeshEQ.dir/flags.make
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_dsp/juce_dsp.cpp.o: _deps/juce-src/modules/juce_dsp/juce_dsp.cpp
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_dsp/juce_dsp.cpp.o: CMakeFiles/SeshEQ.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_dsp/juce_dsp.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_dsp/juce_dsp.cpp.o"
 	/usr/bin/g++-14 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_dsp/juce_dsp.cpp.o -MF CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_dsp/juce_dsp.cpp.o.d -o CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_dsp/juce_dsp.cpp.o -c /workspace/build/_deps/juce-src/modules/juce_dsp/juce_dsp.cpp
 
 CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_dsp/juce_dsp.cpp.i: cmake_force
@@ -402,6 +472,11 @@ SeshEQ_OBJECTS = \
 "CMakeFiles/SeshEQ.dir/src/dsp/Gate.cpp.o" \
 "CMakeFiles/SeshEQ.dir/src/dsp/Limiter.cpp.o" \
 "CMakeFiles/SeshEQ.dir/src/utils/Parameters.cpp.o" \
+"CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.o" \
+"CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.o" \
+"CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.o" \
+"CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.o" \
+"CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.o" \
 "CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors.cpp.o" \
 "CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o" \
 "CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o" \
@@ -429,6 +504,11 @@ SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a: CMakeFiles/SeshEQ.dir/src/dsp/C
 SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a: CMakeFiles/SeshEQ.dir/src/dsp/Gate.cpp.o
 SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a: CMakeFiles/SeshEQ.dir/src/dsp/Limiter.cpp.o
 SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a: CMakeFiles/SeshEQ.dir/src/utils/Parameters.cpp.o
+SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a: CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.o
+SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a: CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.o
+SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a: CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.o
+SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a: CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.o
+SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a: CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.o
 SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a: CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors.cpp.o
 SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a: CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_ara.cpp.o
 SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a: CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_audio_processors/juce_audio_processors_lv2_libs.cpp.o
@@ -445,7 +525,7 @@ SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a: CMakeFiles/SeshEQ.dir/_deps/juc
 SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a: CMakeFiles/SeshEQ.dir/_deps/juce-src/modules/juce_dsp/juce_dsp.cpp.o
 SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a: CMakeFiles/SeshEQ.dir/build.make
 SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a: CMakeFiles/SeshEQ.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Linking CXX static library SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/workspace/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Linking CXX static library SeshEQ_artefacts/Release/libSeshEQ_SharedCode.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/SeshEQ.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SeshEQ.dir/link.txt --verbose=$(VERBOSE)
 

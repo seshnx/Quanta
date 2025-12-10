@@ -30,6 +30,11 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/workspace/src/dsp/Gate.cpp" "CMakeFiles/SeshEQ.dir/src/dsp/Gate.cpp.o" "gcc" "CMakeFiles/SeshEQ.dir/src/dsp/Gate.cpp.o.d"
   "/workspace/src/dsp/LevelDetector.cpp" "CMakeFiles/SeshEQ.dir/src/dsp/LevelDetector.cpp.o" "gcc" "CMakeFiles/SeshEQ.dir/src/dsp/LevelDetector.cpp.o.d"
   "/workspace/src/dsp/Limiter.cpp" "CMakeFiles/SeshEQ.dir/src/dsp/Limiter.cpp.o" "gcc" "CMakeFiles/SeshEQ.dir/src/dsp/Limiter.cpp.o.d"
+  "/workspace/src/ui/EQCurveDisplay.cpp" "CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.o" "gcc" "CMakeFiles/SeshEQ.dir/src/ui/EQCurveDisplay.cpp.o.d"
+  "/workspace/src/ui/LookAndFeel.cpp" "CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.o" "gcc" "CMakeFiles/SeshEQ.dir/src/ui/LookAndFeel.cpp.o.d"
+  "/workspace/src/ui/MeterComponent.cpp" "CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.o" "gcc" "CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.o.d"
+  "/workspace/src/ui/SpectrumAnalyzer.cpp" "CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.o" "gcc" "CMakeFiles/SeshEQ.dir/src/ui/SpectrumAnalyzer.cpp.o.d"
+  "/workspace/src/utils/FFTProcessor.cpp" "CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.o" "gcc" "CMakeFiles/SeshEQ.dir/src/utils/FFTProcessor.cpp.o.d"
   "/workspace/src/utils/Parameters.cpp" "CMakeFiles/SeshEQ.dir/src/utils/Parameters.cpp.o" "gcc" "CMakeFiles/SeshEQ.dir/src/utils/Parameters.cpp.o.d"
   )
 

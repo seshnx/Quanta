@@ -31,6 +31,11 @@ set(PLUGIN_SOURCES
     src/dsp/Gate.cpp
     src/dsp/Limiter.cpp
     src/utils/Parameters.cpp
+    src/utils/FFTProcessor.cpp
+    src/ui/SpectrumAnalyzer.cpp
+    src/ui/EQCurveDisplay.cpp
+    src/ui/MeterComponent.cpp
+    src/ui/LookAndFeel.cpp
 )
 
 set(PLUGIN_HEADERS
@@ -44,6 +49,11 @@ set(PLUGIN_HEADERS
     src/dsp/Limiter.h
     src/utils/Parameters.h
     src/utils/SmoothValue.h
+    src/utils/FFTProcessor.h
+    src/ui/SpectrumAnalyzer.h
+    src/ui/EQCurveDisplay.h
+    src/ui/MeterComponent.h
+    src/ui/LookAndFeel.h
 )
 
 # Define the plugin

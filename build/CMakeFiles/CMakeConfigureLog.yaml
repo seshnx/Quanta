@@ -632,3 +632,40 @@ events:
         
       exitCode: 0
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "build/_deps/juce-src/extras/Build/CMake/JUCECheckAtomic.cmake:64 (try_compile)"
+      - "build/_deps/juce-src/extras/Build/CMake/JUCECheckAtomic.cmake:119 (_juce_create_atomic_target)"
+      - "build/_deps/juce-src/extras/Build/CMake/JUCEModuleSupport.cmake:44 (include)"
+      - "build/_deps/juce-src/CMakeLists.txt:41 (include)"
+    directories:
+      source: "/workspace/build/_deps/juce-build/check_atomic_dir_9b9wDEbKdbav8eQy/CMakeFiles/CMakeTmp"
+      binary: "/workspace/build/_deps/juce-build/check_atomic_dir_9b9wDEbKdbav8eQy/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "compile_result"
+      cached: true
+      stdout: |
+        Change Dir: '/workspace/build/_deps/juce-build/check_atomic_dir_9b9wDEbKdbav8eQy/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_7b257/fast
+        gmake[1]: Entering directory '/workspace/build/_deps/juce-build/check_atomic_dir_9b9wDEbKdbav8eQy/CMakeFiles/CMakeTmp'
+        /usr/bin/gmake  -f CMakeFiles/cmTC_7b257.dir/build.make CMakeFiles/cmTC_7b257.dir/build
+        gmake[2]: Entering directory '/workspace/build/_deps/juce-build/check_atomic_dir_9b9wDEbKdbav8eQy/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_7b257.dir/check_atomic_uPDjm4gqfjA1T3mQ.cpp.o
+        /usr/bin/g++-14   -std=c++17 -o CMakeFiles/cmTC_7b257.dir/check_atomic_uPDjm4gqfjA1T3mQ.cpp.o -c /workspace/build/_deps/juce-build/check_atomic_uPDjm4gqfjA1T3mQ.cpp
+        Linking CXX executable cmTC_7b257
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7b257.dir/link.txt --verbose=1
+        /usr/bin/g++-14 CMakeFiles/cmTC_7b257.dir/check_atomic_uPDjm4gqfjA1T3mQ.cpp.o -o cmTC_7b257 
+        gmake[2]: Leaving directory '/workspace/build/_deps/juce-build/check_atomic_dir_9b9wDEbKdbav8eQy/CMakeFiles/CMakeTmp'
+        gmake[1]: Leaving directory '/workspace/build/_deps/juce-build/check_atomic_dir_9b9wDEbKdbav8eQy/CMakeFiles/CMakeTmp'
+        
+      exitCode: 0
+...

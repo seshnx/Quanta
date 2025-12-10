@@ -723,7 +723,7 @@ __pkg_config_checked_juce_graphics_LINUX_DEPS:INTERNAL=1
 __pkg_config_checked_juce_opengl_LINUX_DEPS:INTERNAL=1
 cmake_package_name:INTERNAL=GTest
 //Result of TRY_COMPILE
-compile_result:INTERNAL=FALSE
+compile_result:INTERNAL=TRUE
 generated_dir:INTERNAL=/workspace/build/_deps/googletest-build/googletest/generated
 //ADVANCED property for variable: gmock_build_tests
 gmock_build_tests-ADVANCED:INTERNAL=1

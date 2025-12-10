@@ -7,6 +7,7 @@
 #include "dsp/Limiter.h"
 #include "utils/Parameters.h"
 #include "utils/SmoothValue.h"
+#include "utils/FFTProcessor.h"
 
 namespace SeshEQ {
 
@@ -70,6 +71,10 @@ public:
     // Get input/output levels for metering
     float getInputLevel() const { return inputLevelDb.load(); }
     float getOutputLevel() const { return outputLevelDb.load(); }
+    
+    // Get FFT processors for spectrum display
+    FFTProcessor& getPreFFT() { return fftProcessor.getPreFFT(); }
+    FFTProcessor& getPostFFT() { return fftProcessor.getPostFFT(); }
 
 private:
     // Parameter tree state
@@ -80,6 +85,9 @@ private:
     Compressor compressor;
     Gate gate;
     Limiter limiter;
+    
+    // FFT for spectrum analysis
+    DualFFTProcessor fftProcessor;
     
     // Global parameters
     SmoothGain<float> inputGainSmoother;

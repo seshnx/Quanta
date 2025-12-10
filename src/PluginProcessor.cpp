@@ -74,6 +74,9 @@ void PluginProcessor::prepareToPlay(double sampleRate, int samplesPerBlock) {
     gate.prepare(sampleRate, samplesPerBlock);
     limiter.prepare(sampleRate, samplesPerBlock);
     
+    // Prepare FFT analyzer
+    fftProcessor.prepare(sampleRate);
+    
     // Prepare gain smoothers
     inputGainSmoother.prepare(sampleRate, 20.0);
     outputGainSmoother.prepare(sampleRate, 20.0);
@@ -163,6 +166,9 @@ void PluginProcessor::processBlock(juce::AudioBuffer<float>& buffer,
         }
     }
     
+    // Push pre-EQ samples to FFT analyzer
+    fftProcessor.pushPreSamples(buffer);
+    
     // Process EQ
     eqProcessor.process(buffer);
     
@@ -192,6 +198,9 @@ void PluginProcessor::processBlock(juce::AudioBuffer<float>& buffer,
             }
         }
     }
+    
+    // Push post-processing samples to FFT analyzer
+    fftProcessor.pushPostSamples(buffer);
     
     // Calculate output level for metering
     float maxOutputLevel = 0.0f;
