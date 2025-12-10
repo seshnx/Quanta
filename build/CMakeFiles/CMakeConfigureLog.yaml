@@ -706,3 +706,38 @@ events:
         
       exitCode: 0
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "build/_deps/juce-src/extras/Build/CMake/JUCECheckAtomic.cmake:64 (try_compile)"
+      - "build/_deps/juce-src/extras/Build/CMake/JUCECheckAtomic.cmake:119 (_juce_create_atomic_target)"
+      - "build/_deps/juce-src/extras/Build/CMake/JUCEModuleSupport.cmake:44 (include)"
+      - "build/_deps/juce-src/CMakeLists.txt:41 (include)"
+    directories:
+      source: "/workspace/build/_deps/juce-build/check_atomic_dir_hjb9ixo6kdxT0Jsg/CMakeFiles/CMakeTmp"
+      binary: "/workspace/build/_deps/juce-build/check_atomic_dir_hjb9ixo6kdxT0Jsg/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "compile_result"
+      cached: true
+      stdout: |
+        Change Dir: '/workspace/build/_deps/juce-build/check_atomic_dir_hjb9ixo6kdxT0Jsg/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_17aa9/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_17aa9.dir/build.make CMakeFiles/cmTC_17aa9.dir/build
+        gmake[1]: Entering directory '/workspace/build/_deps/juce-build/check_atomic_dir_hjb9ixo6kdxT0Jsg/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_17aa9.dir/check_atomic_bnA71O7JN1C42u9u.cpp.o
+        /usr/bin/g++-14   -std=c++17 -o CMakeFiles/cmTC_17aa9.dir/check_atomic_bnA71O7JN1C42u9u.cpp.o -c /workspace/build/_deps/juce-build/check_atomic_bnA71O7JN1C42u9u.cpp
+        Linking CXX executable cmTC_17aa9
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_17aa9.dir/link.txt --verbose=1
+        /usr/bin/g++-14 CMakeFiles/cmTC_17aa9.dir/check_atomic_bnA71O7JN1C42u9u.cpp.o -o cmTC_17aa9 
+        gmake[1]: Leaving directory '/workspace/build/_deps/juce-build/check_atomic_dir_hjb9ixo6kdxT0Jsg/CMakeFiles/CMakeTmp'
+        
+      exitCode: 0
+...

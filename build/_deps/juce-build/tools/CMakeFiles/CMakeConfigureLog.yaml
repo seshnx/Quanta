@@ -666,3 +666,38 @@ events:
         
       exitCode: 0
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "extras/Build/CMake/JUCECheckAtomic.cmake:64 (try_compile)"
+      - "extras/Build/CMake/JUCECheckAtomic.cmake:119 (_juce_create_atomic_target)"
+      - "extras/Build/CMake/JUCEModuleSupport.cmake:44 (include)"
+      - "CMakeLists.txt:41 (include)"
+    directories:
+      source: "/workspace/build/_deps/juce-build/tools/check_atomic_dir_BtKSScvwNmOIsLsy/CMakeFiles/CMakeTmp"
+      binary: "/workspace/build/_deps/juce-build/tools/check_atomic_dir_BtKSScvwNmOIsLsy/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "compile_result"
+      cached: true
+      stdout: |
+        Change Dir: '/workspace/build/_deps/juce-build/tools/check_atomic_dir_BtKSScvwNmOIsLsy/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_65d0f/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_65d0f.dir/build.make CMakeFiles/cmTC_65d0f.dir/build
+        gmake[1]: Entering directory '/workspace/build/_deps/juce-build/tools/check_atomic_dir_BtKSScvwNmOIsLsy/CMakeFiles/CMakeTmp'
+        Building CXX object CMakeFiles/cmTC_65d0f.dir/check_atomic_4d3syH2nOQyatPj3.cpp.o
+        /usr/bin/g++-14   -std=c++17 -o CMakeFiles/cmTC_65d0f.dir/check_atomic_4d3syH2nOQyatPj3.cpp.o -c /workspace/build/_deps/juce-build/tools/check_atomic_4d3syH2nOQyatPj3.cpp
+        Linking CXX executable cmTC_65d0f
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_65d0f.dir/link.txt --verbose=1
+        /usr/bin/g++-14 CMakeFiles/cmTC_65d0f.dir/check_atomic_4d3syH2nOQyatPj3.cpp.o -o cmTC_65d0f 
+        gmake[1]: Leaving directory '/workspace/build/_deps/juce-build/tools/check_atomic_dir_BtKSScvwNmOIsLsy/CMakeFiles/CMakeTmp'
+        
+      exitCode: 0
+...

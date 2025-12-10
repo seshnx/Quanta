@@ -11,6 +11,7 @@
 #include "utils/Parameters.h"
 #include "utils/SmoothValue.h"
 #include "utils/FFTProcessor.h"
+#include "presets/PresetManager.h"
 
 namespace SeshEQ {
 
@@ -78,10 +79,16 @@ public:
     // Get FFT processors for spectrum display
     FFTProcessor& getPreFFT() { return fftProcessor.getPreFFT(); }
     FFTProcessor& getPostFFT() { return fftProcessor.getPostFFT(); }
+    
+    // Get preset manager
+    PresetManager& getPresetManager() { return presetManager; }
 
 private:
     // Parameter tree state
     juce::AudioProcessorValueTreeState apvts;
+    
+    // Preset manager (must be after apvts initialization)
+    PresetManager presetManager { apvts };
     
     // DSP processors
     EQProcessor eqProcessor;

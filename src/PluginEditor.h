@@ -6,6 +6,7 @@
 #include "ui/EQCurveDisplay.h"
 #include "ui/MeterComponent.h"
 #include "ui/LookAndFeel.h"
+#include "ui/PresetBrowser.h"
 
 namespace SeshEQ {
 
@@ -39,6 +40,11 @@ private:
     
     // Custom look and feel
     SeshLookAndFeel lookAndFeel;
+    
+    //==============================================================================
+    // Preset controls
+    PresetSelector presetSelector;
+    ABComparisonPanel abPanel;
     
     //==============================================================================
     // Main display area - Spectrum + EQ Curve

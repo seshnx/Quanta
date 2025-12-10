@@ -83,11 +83,18 @@ void PluginEditor::BandControlPanel::resized() {
 //==============================================================================
 
 PluginEditor::PluginEditor(PluginProcessor& p)
-    : AudioProcessorEditor(&p), processorRef(p)
+    : AudioProcessorEditor(&p), processorRef(p),
+      presetSelector(p.getPresetManager()),
+      abPanel(p.getPresetManager())
 {
     setLookAndFeel(&lookAndFeel);
     
     auto& apvts = processorRef.getAPVTS();
+    
+    //==========================================================================
+    // Preset controls
+    addAndMakeVisible(presetSelector);
+    addAndMakeVisible(abPanel);
     
     //==========================================================================
     // Spectrum and EQ display
@@ -330,8 +337,18 @@ void PluginEditor::resized() {
     
     bounds.reduce(padding, padding);
     
-    // Header (title area)
-    bounds.removeFromTop(headerHeight - padding);
+    // Header (title area + preset controls)
+    auto headerArea = bounds.removeFromTop(headerHeight - padding);
+    
+    // Title takes left portion (handled by paint)
+    headerArea.removeFromLeft(130);
+    
+    // A/B panel next to title
+    abPanel.setBounds(headerArea.removeFromLeft(120).reduced(2, 8));
+    
+    // Preset selector takes the rest
+    headerArea.removeFromLeft(10);
+    presetSelector.setBounds(headerArea.reduced(2, 8));
     
     //==========================================================================
     // Top section: Spectrum + EQ Curve

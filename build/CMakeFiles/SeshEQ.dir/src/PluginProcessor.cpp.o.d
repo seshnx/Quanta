@@ -897,6 +897,7 @@ CMakeFiles/SeshEQ.dir/src/PluginProcessor.cpp.o: \
  /workspace/build/_deps/juce-src/modules/juce_dsp/widgets/juce_Phaser.h \
  /workspace/build/_deps/juce-src/modules/juce_dsp/widgets/juce_Chorus.h \
  /workspace/src/dsp/SidechainFilter.h /workspace/src/utils/FFTProcessor.h \
- /workspace/src/PluginEditor.h /workspace/src/ui/SpectrumAnalyzer.h \
- /workspace/src/ui/EQCurveDisplay.h /workspace/src/ui/MeterComponent.h \
- /workspace/src/ui/LookAndFeel.h
+ /workspace/src/presets/PresetManager.h /workspace/src/PluginEditor.h \
+ /workspace/src/ui/SpectrumAnalyzer.h /workspace/src/ui/EQCurveDisplay.h \
+ /workspace/src/ui/MeterComponent.h /workspace/src/ui/LookAndFeel.h \
+ /workspace/src/ui/PresetBrowser.h

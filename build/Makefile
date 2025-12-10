@@ -1076,6 +1076,54 @@ src/dsp/Limiter.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/dsp/Limiter.cpp.s
 .PHONY : src/dsp/Limiter.cpp.s
 
+src/presets/FactoryPresets.o: src/presets/FactoryPresets.cpp.o
+.PHONY : src/presets/FactoryPresets.o
+
+# target to build an object file
+src/presets/FactoryPresets.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/presets/FactoryPresets.cpp.o
+.PHONY : src/presets/FactoryPresets.cpp.o
+
+src/presets/FactoryPresets.i: src/presets/FactoryPresets.cpp.i
+.PHONY : src/presets/FactoryPresets.i
+
+# target to preprocess a source file
+src/presets/FactoryPresets.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/presets/FactoryPresets.cpp.i
+.PHONY : src/presets/FactoryPresets.cpp.i
+
+src/presets/FactoryPresets.s: src/presets/FactoryPresets.cpp.s
+.PHONY : src/presets/FactoryPresets.s
+
+# target to generate assembly for a file
+src/presets/FactoryPresets.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/presets/FactoryPresets.cpp.s
+.PHONY : src/presets/FactoryPresets.cpp.s
+
+src/presets/PresetManager.o: src/presets/PresetManager.cpp.o
+.PHONY : src/presets/PresetManager.o
+
+# target to build an object file
+src/presets/PresetManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/presets/PresetManager.cpp.o
+.PHONY : src/presets/PresetManager.cpp.o
+
+src/presets/PresetManager.i: src/presets/PresetManager.cpp.i
+.PHONY : src/presets/PresetManager.i
+
+# target to preprocess a source file
+src/presets/PresetManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/presets/PresetManager.cpp.i
+.PHONY : src/presets/PresetManager.cpp.i
+
+src/presets/PresetManager.s: src/presets/PresetManager.cpp.s
+.PHONY : src/presets/PresetManager.s
+
+# target to generate assembly for a file
+src/presets/PresetManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/presets/PresetManager.cpp.s
+.PHONY : src/presets/PresetManager.cpp.s
+
 src/ui/EQCurveDisplay.o: src/ui/EQCurveDisplay.cpp.o
 .PHONY : src/ui/EQCurveDisplay.o
 
@@ -1147,6 +1195,30 @@ src/ui/MeterComponent.s: src/ui/MeterComponent.cpp.s
 src/ui/MeterComponent.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/ui/MeterComponent.cpp.s
 .PHONY : src/ui/MeterComponent.cpp.s
+
+src/ui/PresetBrowser.o: src/ui/PresetBrowser.cpp.o
+.PHONY : src/ui/PresetBrowser.o
+
+# target to build an object file
+src/ui/PresetBrowser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/ui/PresetBrowser.cpp.o
+.PHONY : src/ui/PresetBrowser.cpp.o
+
+src/ui/PresetBrowser.i: src/ui/PresetBrowser.cpp.i
+.PHONY : src/ui/PresetBrowser.i
+
+# target to preprocess a source file
+src/ui/PresetBrowser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/ui/PresetBrowser.cpp.i
+.PHONY : src/ui/PresetBrowser.cpp.i
+
+src/ui/PresetBrowser.s: src/ui/PresetBrowser.cpp.s
+.PHONY : src/ui/PresetBrowser.s
+
+# target to generate assembly for a file
+src/ui/PresetBrowser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SeshEQ.dir/build.make CMakeFiles/SeshEQ.dir/src/ui/PresetBrowser.cpp.s
+.PHONY : src/ui/PresetBrowser.cpp.s
 
 src/ui/SpectrumAnalyzer.o: src/ui/SpectrumAnalyzer.cpp.o
 .PHONY : src/ui/SpectrumAnalyzer.o
@@ -1384,6 +1456,12 @@ help:
 	@echo "... src/dsp/Limiter.o"
 	@echo "... src/dsp/Limiter.i"
 	@echo "... src/dsp/Limiter.s"
+	@echo "... src/presets/FactoryPresets.o"
+	@echo "... src/presets/FactoryPresets.i"
+	@echo "... src/presets/FactoryPresets.s"
+	@echo "... src/presets/PresetManager.o"
+	@echo "... src/presets/PresetManager.i"
+	@echo "... src/presets/PresetManager.s"
 	@echo "... src/ui/EQCurveDisplay.o"
 	@echo "... src/ui/EQCurveDisplay.i"
 	@echo "... src/ui/EQCurveDisplay.s"
@@ -1393,6 +1471,9 @@ help:
 	@echo "... src/ui/MeterComponent.o"
 	@echo "... src/ui/MeterComponent.i"
 	@echo "... src/ui/MeterComponent.s"
+	@echo "... src/ui/PresetBrowser.o"
+	@echo "... src/ui/PresetBrowser.i"
+	@echo "... src/ui/PresetBrowser.s"
 	@echo "... src/ui/SpectrumAnalyzer.o"
 	@echo "... src/ui/SpectrumAnalyzer.i"
 	@echo "... src/ui/SpectrumAnalyzer.s"

@@ -36,6 +36,9 @@ set(PLUGIN_SOURCES
     src/ui/EQCurveDisplay.cpp
     src/ui/MeterComponent.cpp
     src/ui/LookAndFeel.cpp
+    src/ui/PresetBrowser.cpp
+    src/presets/PresetManager.cpp
+    src/presets/FactoryPresets.cpp
 )
 
 set(PLUGIN_HEADERS
@@ -57,6 +60,9 @@ set(PLUGIN_HEADERS
     src/ui/EQCurveDisplay.h
     src/ui/MeterComponent.h
     src/ui/LookAndFeel.h
+    src/ui/PresetBrowser.h
+    src/presets/PresetManager.h
+    src/presets/FactoryPresets.h
 )
 
 # Define the plugin

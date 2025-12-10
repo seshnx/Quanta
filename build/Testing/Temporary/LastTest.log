@@ -1,0 +1,975 @@
+Start testing: Dec 10 19:57 UTC
+----------------------------------------------------------
+1/36 Testing: BiquadFilterTest.ProcessesSampleWithoutCrash
+1/36 Test: BiquadFilterTest.ProcessesSampleWithoutCrash
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.ProcessesSampleWithoutCrash" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.ProcessesSampleWithoutCrash" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.ProcessesSampleWithoutCrash
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.ProcessesSampleWithoutCrash
+[       OK ] BiquadFilterTest.ProcessesSampleWithoutCrash (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.ProcessesSampleWithoutCrash" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.ProcessesSampleWithoutCrash" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/36 Testing: BiquadFilterTest.ResetClearsState
+2/36 Test: BiquadFilterTest.ResetClearsState
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.ResetClearsState" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.ResetClearsState" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.ResetClearsState
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.ResetClearsState
+[       OK ] BiquadFilterTest.ResetClearsState (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.ResetClearsState" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.ResetClearsState" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/36 Testing: BiquadFilterTest.LowPassAttenuatesHighFrequencies
+3/36 Test: BiquadFilterTest.LowPassAttenuatesHighFrequencies
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.LowPassAttenuatesHighFrequencies" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.LowPassAttenuatesHighFrequencies" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.LowPassAttenuatesHighFrequencies
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.LowPassAttenuatesHighFrequencies
+[       OK ] BiquadFilterTest.LowPassAttenuatesHighFrequencies (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.LowPassAttenuatesHighFrequencies" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.LowPassAttenuatesHighFrequencies" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/36 Testing: BiquadFilterTest.LowPassCutoffFrequencyAffectsResponse
+4/36 Test: BiquadFilterTest.LowPassCutoffFrequencyAffectsResponse
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.LowPassCutoffFrequencyAffectsResponse" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.LowPassCutoffFrequencyAffectsResponse" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.LowPassCutoffFrequencyAffectsResponse
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.LowPassCutoffFrequencyAffectsResponse
+[       OK ] BiquadFilterTest.LowPassCutoffFrequencyAffectsResponse (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.LowPassCutoffFrequencyAffectsResponse" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.LowPassCutoffFrequencyAffectsResponse" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/36 Testing: BiquadFilterTest.HighPassAttenuatesLowFrequencies
+5/36 Test: BiquadFilterTest.HighPassAttenuatesLowFrequencies
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.HighPassAttenuatesLowFrequencies" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.HighPassAttenuatesLowFrequencies" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.HighPassAttenuatesLowFrequencies
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.HighPassAttenuatesLowFrequencies
+[       OK ] BiquadFilterTest.HighPassAttenuatesLowFrequencies (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.HighPassAttenuatesLowFrequencies" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.HighPassAttenuatesLowFrequencies" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/36 Testing: BiquadFilterTest.PeakFilterBoostsAtCenterFrequency
+6/36 Test: BiquadFilterTest.PeakFilterBoostsAtCenterFrequency
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.PeakFilterBoostsAtCenterFrequency" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.PeakFilterBoostsAtCenterFrequency" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.PeakFilterBoostsAtCenterFrequency
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.PeakFilterBoostsAtCenterFrequency
+[       OK ] BiquadFilterTest.PeakFilterBoostsAtCenterFrequency (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.PeakFilterBoostsAtCenterFrequency" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.PeakFilterBoostsAtCenterFrequency" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/36 Testing: BiquadFilterTest.PeakFilterCutsAtCenterFrequency
+7/36 Test: BiquadFilterTest.PeakFilterCutsAtCenterFrequency
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.PeakFilterCutsAtCenterFrequency" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.PeakFilterCutsAtCenterFrequency" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.PeakFilterCutsAtCenterFrequency
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.PeakFilterCutsAtCenterFrequency
+[       OK ] BiquadFilterTest.PeakFilterCutsAtCenterFrequency (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.PeakFilterCutsAtCenterFrequency" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.PeakFilterCutsAtCenterFrequency" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/36 Testing: BiquadFilterTest.PeakFilterQAffectsBandwidth
+8/36 Test: BiquadFilterTest.PeakFilterQAffectsBandwidth
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.PeakFilterQAffectsBandwidth" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.PeakFilterQAffectsBandwidth" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.PeakFilterQAffectsBandwidth
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.PeakFilterQAffectsBandwidth
+[       OK ] BiquadFilterTest.PeakFilterQAffectsBandwidth (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.PeakFilterQAffectsBandwidth" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.PeakFilterQAffectsBandwidth" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/36 Testing: BiquadFilterTest.LowShelfBoostsBelowFrequency
+9/36 Test: BiquadFilterTest.LowShelfBoostsBelowFrequency
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.LowShelfBoostsBelowFrequency" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.LowShelfBoostsBelowFrequency" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.LowShelfBoostsBelowFrequency
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.LowShelfBoostsBelowFrequency
+[       OK ] BiquadFilterTest.LowShelfBoostsBelowFrequency (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.LowShelfBoostsBelowFrequency" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.LowShelfBoostsBelowFrequency" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/36 Testing: BiquadFilterTest.HighShelfBoostsAboveFrequency
+10/36 Test: BiquadFilterTest.HighShelfBoostsAboveFrequency
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.HighShelfBoostsAboveFrequency" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.HighShelfBoostsAboveFrequency" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.HighShelfBoostsAboveFrequency
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.HighShelfBoostsAboveFrequency
+[       OK ] BiquadFilterTest.HighShelfBoostsAboveFrequency (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.HighShelfBoostsAboveFrequency" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.HighShelfBoostsAboveFrequency" time elapsed: 00:00:00
+----------------------------------------------------------
+
+11/36 Testing: BiquadFilterTest.NotchFilterAttenuatesAtCenterFrequency
+11/36 Test: BiquadFilterTest.NotchFilterAttenuatesAtCenterFrequency
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.NotchFilterAttenuatesAtCenterFrequency" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.NotchFilterAttenuatesAtCenterFrequency" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.NotchFilterAttenuatesAtCenterFrequency
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.NotchFilterAttenuatesAtCenterFrequency
+[       OK ] BiquadFilterTest.NotchFilterAttenuatesAtCenterFrequency (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.NotchFilterAttenuatesAtCenterFrequency" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.NotchFilterAttenuatesAtCenterFrequency" time elapsed: 00:00:00
+----------------------------------------------------------
+
+12/36 Testing: BiquadFilterTest.BandPassPassesCenterFrequency
+12/36 Test: BiquadFilterTest.BandPassPassesCenterFrequency
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.BandPassPassesCenterFrequency" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.BandPassPassesCenterFrequency" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.BandPassPassesCenterFrequency
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.BandPassPassesCenterFrequency
+[       OK ] BiquadFilterTest.BandPassPassesCenterFrequency (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.BandPassPassesCenterFrequency" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.BandPassPassesCenterFrequency" time elapsed: 00:00:00
+----------------------------------------------------------
+
+13/36 Testing: BiquadFilterTest.BlockProcessingMatchesSampleBySample
+13/36 Test: BiquadFilterTest.BlockProcessingMatchesSampleBySample
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.BlockProcessingMatchesSampleBySample" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.BlockProcessingMatchesSampleBySample" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.BlockProcessingMatchesSampleBySample
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.BlockProcessingMatchesSampleBySample
+[       OK ] BiquadFilterTest.BlockProcessingMatchesSampleBySample (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.BlockProcessingMatchesSampleBySample" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.BlockProcessingMatchesSampleBySample" time elapsed: 00:00:00
+----------------------------------------------------------
+
+14/36 Testing: BiquadFilterTest.StereoFilterProcessesBothChannels
+14/36 Test: BiquadFilterTest.StereoFilterProcessesBothChannels
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.StereoFilterProcessesBothChannels" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.StereoFilterProcessesBothChannels" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.StereoFilterProcessesBothChannels
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.StereoFilterProcessesBothChannels
+[       OK ] BiquadFilterTest.StereoFilterProcessesBothChannels (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.StereoFilterProcessesBothChannels" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.StereoFilterProcessesBothChannels" time elapsed: 00:00:00
+----------------------------------------------------------
+
+15/36 Testing: BiquadFilterTest.HandlesExtremeFrequencies
+15/36 Test: BiquadFilterTest.HandlesExtremeFrequencies
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.HandlesExtremeFrequencies" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.HandlesExtremeFrequencies" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.HandlesExtremeFrequencies
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.HandlesExtremeFrequencies
+[       OK ] BiquadFilterTest.HandlesExtremeFrequencies (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.HandlesExtremeFrequencies" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.HandlesExtremeFrequencies" time elapsed: 00:00:00
+----------------------------------------------------------
+
+16/36 Testing: BiquadFilterTest.HandlesExtremeQ
+16/36 Test: BiquadFilterTest.HandlesExtremeQ
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.HandlesExtremeQ" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.HandlesExtremeQ" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.HandlesExtremeQ
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.HandlesExtremeQ
+[       OK ] BiquadFilterTest.HandlesExtremeQ (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.HandlesExtremeQ" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.HandlesExtremeQ" time elapsed: 00:00:00
+----------------------------------------------------------
+
+17/36 Testing: BiquadFilterTest.HandlesExtremeGain
+17/36 Test: BiquadFilterTest.HandlesExtremeGain
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.HandlesExtremeGain" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.HandlesExtremeGain" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.HandlesExtremeGain
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.HandlesExtremeGain
+[       OK ] BiquadFilterTest.HandlesExtremeGain (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.HandlesExtremeGain" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.HandlesExtremeGain" time elapsed: 00:00:00
+----------------------------------------------------------
+
+18/36 Testing: BiquadFilterTest.HandlesZeroGainPeak
+18/36 Test: BiquadFilterTest.HandlesZeroGainPeak
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.HandlesZeroGainPeak" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.HandlesZeroGainPeak" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.HandlesZeroGainPeak
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.HandlesZeroGainPeak
+[       OK ] BiquadFilterTest.HandlesZeroGainPeak (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.HandlesZeroGainPeak" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.HandlesZeroGainPeak" time elapsed: 00:00:00
+----------------------------------------------------------
+
+19/36 Testing: BiquadFilterTest.CoefficientsAreValid
+19/36 Test: BiquadFilterTest.CoefficientsAreValid
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=BiquadFilterTest.CoefficientsAreValid" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"BiquadFilterTest.CoefficientsAreValid" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = BiquadFilterTest.CoefficientsAreValid
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from BiquadFilterTest
+[ RUN      ] BiquadFilterTest.CoefficientsAreValid
+[       OK ] BiquadFilterTest.CoefficientsAreValid (0 ms)
+[----------] 1 test from BiquadFilterTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"BiquadFilterTest.CoefficientsAreValid" end time: Dec 10 19:57 UTC
+"BiquadFilterTest.CoefficientsAreValid" time elapsed: 00:00:00
+----------------------------------------------------------
+
+20/36 Testing: LevelDetectorTest.ProcessesSampleWithoutCrash
+20/36 Test: LevelDetectorTest.ProcessesSampleWithoutCrash
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.ProcessesSampleWithoutCrash" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.ProcessesSampleWithoutCrash" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.ProcessesSampleWithoutCrash
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.ProcessesSampleWithoutCrash
+[       OK ] LevelDetectorTest.ProcessesSampleWithoutCrash (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.ProcessesSampleWithoutCrash" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.ProcessesSampleWithoutCrash" time elapsed: 00:00:00
+----------------------------------------------------------
+
+21/36 Testing: LevelDetectorTest.ResetClearsEnvelope
+21/36 Test: LevelDetectorTest.ResetClearsEnvelope
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.ResetClearsEnvelope" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.ResetClearsEnvelope" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.ResetClearsEnvelope
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.ResetClearsEnvelope
+[       OK ] LevelDetectorTest.ResetClearsEnvelope (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.ResetClearsEnvelope" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.ResetClearsEnvelope" time elapsed: 00:00:00
+----------------------------------------------------------
+
+22/36 Testing: LevelDetectorTest.PeakDetectionTracksPositiveInput
+22/36 Test: LevelDetectorTest.PeakDetectionTracksPositiveInput
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.PeakDetectionTracksPositiveInput" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.PeakDetectionTracksPositiveInput" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.PeakDetectionTracksPositiveInput
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.PeakDetectionTracksPositiveInput
+[       OK ] LevelDetectorTest.PeakDetectionTracksPositiveInput (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.PeakDetectionTracksPositiveInput" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.PeakDetectionTracksPositiveInput" time elapsed: 00:00:00
+----------------------------------------------------------
+
+23/36 Testing: LevelDetectorTest.PeakDetectionTracksNegativeInput
+23/36 Test: LevelDetectorTest.PeakDetectionTracksNegativeInput
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.PeakDetectionTracksNegativeInput" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.PeakDetectionTracksNegativeInput" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.PeakDetectionTracksNegativeInput
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.PeakDetectionTracksNegativeInput
+[       OK ] LevelDetectorTest.PeakDetectionTracksNegativeInput (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.PeakDetectionTracksNegativeInput" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.PeakDetectionTracksNegativeInput" time elapsed: 00:00:00
+----------------------------------------------------------
+
+24/36 Testing: LevelDetectorTest.AttackTimeAffectsRiseTime
+24/36 Test: LevelDetectorTest.AttackTimeAffectsRiseTime
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.AttackTimeAffectsRiseTime" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.AttackTimeAffectsRiseTime" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.AttackTimeAffectsRiseTime
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.AttackTimeAffectsRiseTime
+[       OK ] LevelDetectorTest.AttackTimeAffectsRiseTime (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.AttackTimeAffectsRiseTime" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.AttackTimeAffectsRiseTime" time elapsed: 00:00:00
+----------------------------------------------------------
+
+25/36 Testing: LevelDetectorTest.ReleaseTimeAffectsFallTime
+25/36 Test: LevelDetectorTest.ReleaseTimeAffectsFallTime
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.ReleaseTimeAffectsFallTime" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.ReleaseTimeAffectsFallTime" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.ReleaseTimeAffectsFallTime
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.ReleaseTimeAffectsFallTime
+[       OK ] LevelDetectorTest.ReleaseTimeAffectsFallTime (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.ReleaseTimeAffectsFallTime" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.ReleaseTimeAffectsFallTime" time elapsed: 00:00:00
+----------------------------------------------------------
+
+26/36 Testing: LevelDetectorTest.RMSDetectionGivesLowerValueForSameSignal
+26/36 Test: LevelDetectorTest.RMSDetectionGivesLowerValueForSameSignal
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.RMSDetectionGivesLowerValueForSameSignal" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.RMSDetectionGivesLowerValueForSameSignal" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.RMSDetectionGivesLowerValueForSameSignal
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.RMSDetectionGivesLowerValueForSameSignal
+[       OK ] LevelDetectorTest.RMSDetectionGivesLowerValueForSameSignal (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.RMSDetectionGivesLowerValueForSameSignal" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.RMSDetectionGivesLowerValueForSameSignal" time elapsed: 00:00:00
+----------------------------------------------------------
+
+27/36 Testing: LevelDetectorTest.StereoProcessingTakesMaximum
+27/36 Test: LevelDetectorTest.StereoProcessingTakesMaximum
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.StereoProcessingTakesMaximum" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.StereoProcessingTakesMaximum" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.StereoProcessingTakesMaximum
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.StereoProcessingTakesMaximum
+[       OK ] LevelDetectorTest.StereoProcessingTakesMaximum (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.StereoProcessingTakesMaximum" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.StereoProcessingTakesMaximum" time elapsed: 00:00:00
+----------------------------------------------------------
+
+28/36 Testing: LevelDetectorTest.DbConversionIsCorrect
+28/36 Test: LevelDetectorTest.DbConversionIsCorrect
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.DbConversionIsCorrect" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.DbConversionIsCorrect" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.DbConversionIsCorrect
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.DbConversionIsCorrect
+[       OK ] LevelDetectorTest.DbConversionIsCorrect (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.DbConversionIsCorrect" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.DbConversionIsCorrect" time elapsed: 00:00:00
+----------------------------------------------------------
+
+29/36 Testing: LevelDetectorTest.DbUtilsLinearToDb
+29/36 Test: LevelDetectorTest.DbUtilsLinearToDb
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.DbUtilsLinearToDb" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.DbUtilsLinearToDb" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.DbUtilsLinearToDb
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.DbUtilsLinearToDb
+[       OK ] LevelDetectorTest.DbUtilsLinearToDb (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.DbUtilsLinearToDb" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.DbUtilsLinearToDb" time elapsed: 00:00:00
+----------------------------------------------------------
+
+30/36 Testing: LevelDetectorTest.DbUtilsDbToLinear
+30/36 Test: LevelDetectorTest.DbUtilsDbToLinear
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.DbUtilsDbToLinear" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.DbUtilsDbToLinear" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.DbUtilsDbToLinear
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.DbUtilsDbToLinear
+[       OK ] LevelDetectorTest.DbUtilsDbToLinear (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.DbUtilsDbToLinear" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.DbUtilsDbToLinear" time elapsed: 00:00:00
+----------------------------------------------------------
+
+31/36 Testing: LevelDetectorTest.DbConversionRoundTrip
+31/36 Test: LevelDetectorTest.DbConversionRoundTrip
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.DbConversionRoundTrip" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.DbConversionRoundTrip" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.DbConversionRoundTrip
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.DbConversionRoundTrip
+[       OK ] LevelDetectorTest.DbConversionRoundTrip (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.DbConversionRoundTrip" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.DbConversionRoundTrip" time elapsed: 00:00:00
+----------------------------------------------------------
+
+32/36 Testing: LevelDetectorTest.HandlesZeroInput
+32/36 Test: LevelDetectorTest.HandlesZeroInput
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.HandlesZeroInput" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.HandlesZeroInput" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.HandlesZeroInput
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.HandlesZeroInput
+[       OK ] LevelDetectorTest.HandlesZeroInput (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.HandlesZeroInput" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.HandlesZeroInput" time elapsed: 00:00:00
+----------------------------------------------------------
+
+33/36 Testing: LevelDetectorTest.HandlesSilence
+33/36 Test: LevelDetectorTest.HandlesSilence
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.HandlesSilence" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.HandlesSilence" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.HandlesSilence
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.HandlesSilence
+[       OK ] LevelDetectorTest.HandlesSilence (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.HandlesSilence" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.HandlesSilence" time elapsed: 00:00:00
+----------------------------------------------------------
+
+34/36 Testing: LevelDetectorTest.HandlesVerySmallInput
+34/36 Test: LevelDetectorTest.HandlesVerySmallInput
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.HandlesVerySmallInput" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.HandlesVerySmallInput" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.HandlesVerySmallInput
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.HandlesVerySmallInput
+[       OK ] LevelDetectorTest.HandlesVerySmallInput (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.HandlesVerySmallInput" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.HandlesVerySmallInput" time elapsed: 00:00:00
+----------------------------------------------------------
+
+35/36 Testing: LevelDetectorTest.DbConversionHandlesVerySmallValues
+35/36 Test: LevelDetectorTest.DbConversionHandlesVerySmallValues
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.DbConversionHandlesVerySmallValues" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.DbConversionHandlesVerySmallValues" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.DbConversionHandlesVerySmallValues
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.DbConversionHandlesVerySmallValues
+[       OK ] LevelDetectorTest.DbConversionHandlesVerySmallValues (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.DbConversionHandlesVerySmallValues" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.DbConversionHandlesVerySmallValues" time elapsed: 00:00:00
+----------------------------------------------------------
+
+36/36 Testing: LevelDetectorTest.PrepareWithDifferentSampleRates
+36/36 Test: LevelDetectorTest.PrepareWithDifferentSampleRates
+Command: "/workspace/build/SeshEQ_Tests" "--gtest_filter=LevelDetectorTest.PrepareWithDifferentSampleRates" "--gtest_also_run_disabled_tests"
+Directory: /workspace/build
+"LevelDetectorTest.PrepareWithDifferentSampleRates" start time: Dec 10 19:57 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspace/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = LevelDetectorTest.PrepareWithDifferentSampleRates
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from LevelDetectorTest
+[ RUN      ] LevelDetectorTest.PrepareWithDifferentSampleRates
+[       OK ] LevelDetectorTest.PrepareWithDifferentSampleRates (0 ms)
+[----------] 1 test from LevelDetectorTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"LevelDetectorTest.PrepareWithDifferentSampleRates" end time: Dec 10 19:57 UTC
+"LevelDetectorTest.PrepareWithDifferentSampleRates" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Dec 10 19:57 UTC
