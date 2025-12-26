@@ -14,39 +14,40 @@ public:
     SeshLookAndFeel();
     ~SeshLookAndFeel() override = default;
     
-    // Color scheme
+    // Color scheme - Sci-Fi Theme (Black/Cyan/White/Holographic)
     struct Colors {
-        // Base colors
-        static inline const juce::Colour background      { 0xff1a1a2e };
-        static inline const juce::Colour backgroundLight { 0xff2d2d44 };
-        static inline const juce::Colour backgroundDark  { 0xff0d0d1a };
+        // Base colors (Sci-Fi Dark)
+        static inline const juce::Colour background      { 0xff000000 };  // Pure Black
+        static inline const juce::Colour backgroundLight { 0xff0a0a0a };  // Slightly lighter black
+        static inline const juce::Colour backgroundDark  { 0xff000000 };  // Pure Black
         
-        // Text colors
-        static inline const juce::Colour textPrimary   { 0xffffffff };
-        static inline const juce::Colour textSecondary { 0xffb0b0b0 };
-        static inline const juce::Colour textDim       { 0xff707070 };
+        // Text colors (High Contrast)
+        static inline const juce::Colour textPrimary   { 0xffffffff };  // Pure White
+        static inline const juce::Colour textSecondary { 0xff00ffff };  // Cyan
+        static inline const juce::Colour textDim       { 0xff666666 };  // Gray
         
-        // Accent colors
-        static inline const juce::Colour accent        { 0xff00ff88 };  // Green
-        static inline const juce::Colour accentAlt     { 0xff4dabf7 };  // Blue
-        static inline const juce::Colour warning       { 0xffffcc00 };  // Yellow
-        static inline const juce::Colour danger        { 0xffff4444 };  // Red
+        // Sci-Fi Accent colors
+        static inline const juce::Colour accent        { 0xff00ffff };  // Cyan (primary)
+        static inline const juce::Colour accentAlt     { 0xff00cccc };  // Darker Cyan
+        static inline const juce::Colour holographic   { 0xff88ffff };  // Light Cyan (holographic effect)
+        static inline const juce::Colour warning       { 0xffffff00 };  // Yellow
+        static inline const juce::Colour danger        { 0xffff0000 };  // Red
         
         // Component colors
-        static inline const juce::Colour knobFill      { 0xff3d3d5c };
-        static inline const juce::Colour knobOutline   { 0xff505070 };
-        static inline const juce::Colour knobPointer   { 0xff00ff88 };
+        static inline const juce::Colour knobFill      { 0xff0a0a0a };  // Dark
+        static inline const juce::Colour knobOutline   { 0xff00ffff };  // Cyan outline
+        static inline const juce::Colour knobPointer   { 0xff00ffff };  // Cyan pointer
         
-        // Band colors
+        // Band colors (Cyan variations with holographic accents)
         static inline const std::array<juce::Colour, 8> bandColors = {
-            juce::Colour(0xffff6b6b),  // Band 1 - Red
-            juce::Colour(0xffffa94d),  // Band 2 - Orange
-            juce::Colour(0xffffd43b),  // Band 3 - Yellow
-            juce::Colour(0xff69db7c),  // Band 4 - Green
-            juce::Colour(0xff4dabf7),  // Band 5 - Blue
-            juce::Colour(0xff9775fa),  // Band 6 - Purple
-            juce::Colour(0xfff06595),  // Band 7 - Pink
-            juce::Colour(0xff20c997),  // Band 8 - Teal
+            juce::Colour(0xff00ffff),  // Band 1 - Pure Cyan
+            juce::Colour(0xff00cccc),  // Band 2 - Dark Cyan
+            juce::Colour(0xff88ffff),  // Band 3 - Light Cyan (holographic)
+            juce::Colour(0xff00ffcc),  // Band 4 - Cyan-Green
+            juce::Colour(0xff00ccff),  // Band 5 - Cyan-Blue
+            juce::Colour(0xffccffff),  // Band 6 - Very Light Cyan
+            juce::Colour(0xff66ffff),  // Band 7 - Medium Cyan
+            juce::Colour(0xff00ffff),  // Band 8 - Pure Cyan
         };
     };
     

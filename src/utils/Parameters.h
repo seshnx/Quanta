@@ -16,6 +16,11 @@ namespace ParamIDs {
     inline const juce::String outputGain = "outputGain";
     inline const juce::String dryWet     = "dryWet";
     inline const juce::String bypass     = "bypass";
+    
+    // Advanced features
+    inline const juce::String midSideMode = "midSideMode";
+    inline const juce::String linearPhaseMode = "linearPhaseMode";
+    inline const juce::String dynamicEQMode = "dynamicEQMode";
 
     // EQ Band parameters (use getBandParamID to get full ID)
     inline const juce::String bandFreq   = "freq";
@@ -23,6 +28,14 @@ namespace ParamIDs {
     inline const juce::String bandQ      = "q";
     inline const juce::String bandType   = "type";
     inline const juce::String bandEnable = "enable";
+    
+    // Per-band Multiband Dynamics parameters (Compressor/Expander)
+    inline const juce::String bandDynThreshold = "dynThreshold";
+    inline const juce::String bandDynRatio = "dynRatio";
+    inline const juce::String bandDynAttack = "dynAttack";
+    inline const juce::String bandDynRelease = "dynRelease";
+    inline const juce::String bandDynKnee = "dynKnee";
+    inline const juce::String bandDynEnable = "dynEnable";
 
     // Compressor
     inline const juce::String compThreshold = "compThreshold";
@@ -43,10 +56,14 @@ namespace ParamIDs {
     inline const juce::String gateRange     = "gateRange";
     inline const juce::String gateEnable    = "gateEnable";
 
-    // Limiter
+    // True Peak Limiter
+    inline const juce::String limiterThreshold = "limiterThreshold";
     inline const juce::String limiterCeiling = "limiterCeiling";
     inline const juce::String limiterRelease = "limiterRelease";
     inline const juce::String limiterEnable  = "limiterEnable";
+
+    // Global Oversampling
+    inline const juce::String oversamplingFactor = "oversamplingFactor";
 
     // Helper function to get band-specific parameter ID
     inline juce::String getBandParamID(int bandIndex, const juce::String& param) {
@@ -55,8 +72,12 @@ namespace ParamIDs {
 }
 
 inline juce::StringArray getFilterTypeNames() {
-    return { "Low Pass", "High Pass", "Band Pass", "Notch", 
+    return { "Low Pass", "High Pass", "Band Pass", "Notch",
              "Peak", "Low Shelf", "High Shelf", "All Pass" };
+}
+
+inline juce::StringArray getOversamplingNames() {
+    return { "1x (Off)", "2x", "4x", "8x" };
 }
 
 //==============================================================================

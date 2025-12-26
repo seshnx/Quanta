@@ -1,8 +1,9 @@
 #include "EQProcessor.h"
+#include "utils/MidSideProcessor.h"
 
 namespace SeshEQ {
 
-void EQProcessor::prepare(double sampleRate, int /*samplesPerBlock*/) {
+void EQProcessor::prepare(double sampleRate, int samplesPerBlock) {
     currentSampleRate = sampleRate;
     
     for (int i = 0; i < numBands; ++i) {
@@ -22,6 +23,29 @@ void EQProcessor::prepare(double sampleRate, int /*samplesPerBlock*/) {
         );
         
         bandEnabled[static_cast<size_t>(i)] = true;
+        
+        // Prepare per-band dynamics
+        bandDynamics[static_cast<size_t>(i)].prepare(sampleRate, samplesPerBlock);
+    }
+    
+    // Prepare Mid/Side buffers
+    midBuffer.setSize(1, samplesPerBlock);
+    sideBuffer.setSize(1, samplesPerBlock);
+    
+    // Prepare Linear Phase EQ
+    if (linearPhaseMode) {
+        if (!linearPhaseEQ) {
+            linearPhaseEQ = std::make_unique<LinearPhaseEQ>();
+        }
+        linearPhaseEQ->prepare(sampleRate, samplesPerBlock);
+    }
+    
+    // Prepare Dynamic EQ
+    if (dynamicEQMode) {
+        if (!dynamicEQ) {
+            dynamicEQ = std::make_unique<DynamicEQProcessor>();
+        }
+        dynamicEQ->prepare(sampleRate, samplesPerBlock);
     }
     
     prepared = true;
@@ -37,20 +61,68 @@ void EQProcessor::process(juce::AudioBuffer<float>& buffer) {
     if (!prepared) return;
     
     const int numChannels = buffer.getNumChannels();
+    
+    if (numChannels < 1) return;
+    
+    // Use Linear Phase EQ if enabled
+    if (linearPhaseMode && linearPhaseEQ) {
+        linearPhaseEQ->process(buffer);
+        return;
+    }
+    
+    // Use Dynamic EQ if enabled
+    if (dynamicEQMode && dynamicEQ) {
+        dynamicEQ->process(buffer, buffer);  // Use same buffer as sidechain
+        return;
+    }
+    
+    // Standard processing with optional Mid/Side
+    if (midSideMode && numChannels >= 2) {
+        // Process in Mid/Side domain
+        MidSideProcessor::process(buffer,
+            [this](float* mid, int numSamples) {
+                // Process mid channel
+                juce::AudioBuffer<float> midBuf(1, numSamples);
+                std::copy(mid, mid + numSamples, midBuf.getWritePointer(0));
+                processStandard(midBuf);
+                std::copy(midBuf.getReadPointer(0), midBuf.getReadPointer(0) + numSamples, mid);
+            },
+            [this](float* side, int numSamples) {
+                // Process side channel
+                juce::AudioBuffer<float> sideBuf(1, numSamples);
+                std::copy(side, side + numSamples, sideBuf.getWritePointer(0));
+                processStandard(sideBuf);
+                std::copy(sideBuf.getReadPointer(0), sideBuf.getReadPointer(0) + numSamples, side);
+            }
+        );
+    } else {
+        // Standard stereo/mono processing
+        processStandard(buffer);
+    }
+}
+
+void EQProcessor::processStandard(juce::AudioBuffer<float>& buffer) {
+    const int numChannels = buffer.getNumChannels();
     const int numSamples = buffer.getNumSamples();
     
     if (numChannels < 1) return;
     
-    // Get channel pointers
-    float* leftChannel = buffer.getWritePointer(0);
-    float* rightChannel = numChannels > 1 ? buffer.getWritePointer(1) : nullptr;
+    // Create a working buffer for each band's processing
+    juce::AudioBuffer<float> bandBuffer(numChannels, numSamples);
     
     // Process each enabled band
     for (int band = 0; band < numBands; ++band) {
         if (!bandEnabled[static_cast<size_t>(band)]) continue;
         
+        // Copy current buffer state to band buffer
+        bandBuffer.makeCopyOf(buffer, true);
+        
         auto& filter = filters[static_cast<size_t>(band)];
         auto& smoother = smoothers[static_cast<size_t>(band)];
+        
+        // Get channel pointers for band buffer
+        float* leftChannel = bandBuffer.getWritePointer(0);
+        float* rightChannel = numChannels > 1 ? bandBuffer.getWritePointer(1) : nullptr;
         
         // Check if we need per-sample parameter updates
         const bool needsSmoothing = smoother.frequency.isSmoothing() ||
@@ -85,11 +157,27 @@ void EQProcessor::process(juce::AudioBuffer<float>& buffer) {
                 }
             }
         }
+        
+        // Apply per-band dynamics processing
+        auto& dynamics = bandDynamics[static_cast<size_t>(band)];
+        dynamics.updateFromParameters();
+        dynamics.process(bandBuffer);
+        
+        // Mix band output back into main buffer (additive mixing for multiband)
+        for (int ch = 0; ch < numChannels; ++ch) {
+            const float* bandData = bandBuffer.getReadPointer(ch);
+            float* mainData = buffer.getWritePointer(ch);
+            for (int i = 0; i < numSamples; ++i) {
+                mainData[i] += (bandData[i] - mainData[i]) * 0.5f; // Blend
+            }
+        }
     }
 }
 
 void EQProcessor::setBandParameters(int bandIndex, FilterType type, float freq, float q, float gain, bool enabled) {
     if (bandIndex < 0 || bandIndex >= numBands) return;
+    
+    juce::ScopedLock sl(lock);
     
     auto& filter = filters[static_cast<size_t>(bandIndex)];
     auto& smoother = smoothers[static_cast<size_t>(bandIndex)];
@@ -107,6 +195,8 @@ void EQProcessor::setBandParameters(int bandIndex, FilterType type, float freq, 
 
 void EQProcessor::setBandEnabled(int bandIndex, bool enabled) {
     if (bandIndex < 0 || bandIndex >= numBands) return;
+    
+    juce::ScopedLock sl(lock);
     bandEnabled[static_cast<size_t>(bandIndex)] = enabled;
 }
 
@@ -114,7 +204,21 @@ EQProcessor::BandParams EQProcessor::getBandParameters(int bandIndex) const {
     if (bandIndex < 0 || bandIndex >= numBands) {
         return { FilterType::Peak, 1000.0f, 0.707f, 0.0f, false };
     }
-    
+
+    // Read directly from APVTS parameters (stable values, not smoothed filter state)
+    const auto& ptrs = paramPtrs[static_cast<size_t>(bandIndex)];
+    if (ptrs.frequency && ptrs.q && ptrs.gain && ptrs.type && ptrs.enabled) {
+        return {
+            static_cast<FilterType>(static_cast<int>(ptrs.type->load())),
+            ptrs.frequency->load(),
+            ptrs.q->load(),
+            ptrs.gain->load(),
+            ptrs.enabled->load() > 0.5f
+        };
+    }
+
+    // Fallback to filter state if params not connected
+    juce::ScopedLock sl(lock);
     const auto& filter = filters[static_cast<size_t>(bandIndex)];
     return {
         filter.getType(),
@@ -127,22 +231,40 @@ EQProcessor::BandParams EQProcessor::getBandParameters(int bandIndex) const {
 
 float EQProcessor::getMagnitudeAtFrequency(float frequency) const {
     float totalMagnitude = 1.0f;
-    
+
     for (int i = 0; i < numBands; ++i) {
-        if (bandEnabled[static_cast<size_t>(i)]) {
-            totalMagnitude *= filters[static_cast<size_t>(i)].getMagnitudeAtFrequency(frequency);
+        const auto& ptrs = paramPtrs[static_cast<size_t>(i)];
+        if (ptrs.enabled && ptrs.enabled->load() > 0.5f) {
+            // Use static calculation from APVTS params (stable, no smoothing)
+            totalMagnitude *= BiquadFilter::calcMagnitudeFromParams(
+                static_cast<FilterType>(static_cast<int>(ptrs.type->load())),
+                ptrs.frequency->load(),
+                ptrs.q->load(),
+                ptrs.gain->load(),
+                currentSampleRate,
+                frequency
+            );
         }
     }
-    
+
     return totalMagnitude;
 }
 
 float EQProcessor::getBandMagnitudeAtFrequency(int bandIndex, float frequency) const {
     if (bandIndex < 0 || bandIndex >= numBands) return 1.0f;
-    
-    if (!bandEnabled[static_cast<size_t>(bandIndex)]) return 1.0f;
-    
-    return filters[static_cast<size_t>(bandIndex)].getMagnitudeAtFrequency(frequency);
+
+    const auto& ptrs = paramPtrs[static_cast<size_t>(bandIndex)];
+    if (!ptrs.enabled || ptrs.enabled->load() <= 0.5f) return 1.0f;
+
+    // Use static calculation from APVTS params (stable, no smoothing)
+    return BiquadFilter::calcMagnitudeFromParams(
+        static_cast<FilterType>(static_cast<int>(ptrs.type->load())),
+        ptrs.frequency->load(),
+        ptrs.q->load(),
+        ptrs.gain->load(),
+        currentSampleRate,
+        frequency
+    );
 }
 
 void EQProcessor::connectToParameters(juce::AudioProcessorValueTreeState& apvts) {
@@ -156,6 +278,9 @@ void EQProcessor::connectToParameters(juce::AudioProcessorValueTreeState& apvts)
         ptrs.gain = apvts.getRawParameterValue(getBandParamID(i, bandGain));
         ptrs.type = apvts.getRawParameterValue(getBandParamID(i, bandType));
         ptrs.enabled = apvts.getRawParameterValue(getBandParamID(i, bandEnable));
+        
+        // Connect per-band dynamics
+        bandDynamics[static_cast<size_t>(i)].connectToParameters(apvts, i);
     }
 }
 
@@ -174,6 +299,42 @@ void EQProcessor::updateFromParameters() {
             );
         }
     }
+}
+
+void EQProcessor::setMidSideMode(bool enabled) {
+    midSideMode = enabled;
+}
+
+void EQProcessor::setLinearPhaseMode(bool enabled) {
+    linearPhaseMode = enabled;
+    if (enabled && prepared) {
+        if (!linearPhaseEQ) {
+            linearPhaseEQ = std::make_unique<LinearPhaseEQ>();
+        }
+        linearPhaseEQ->prepare(currentSampleRate, 512);  // Default block size
+    }
+}
+
+void EQProcessor::setDynamicEQMode(bool enabled) {
+    dynamicEQMode = enabled;
+    if (enabled && prepared) {
+        if (!dynamicEQ) {
+            dynamicEQ = std::make_unique<DynamicEQProcessor>();
+        }
+        dynamicEQ->prepare(currentSampleRate, 512);  // Default block size
+    }
+}
+
+float EQProcessor::getBandGainReduction(int bandIndex) const {
+    if (bandIndex < 0 || bandIndex >= numBands) return 0.0f;
+    return bandDynamics[static_cast<size_t>(bandIndex)].getGainReduction();
+}
+
+int EQProcessor::getLatency() const {
+    if (linearPhaseMode && linearPhaseEQ) {
+        return linearPhaseEQ->getLatency();
+    }
+    return 0;
 }
 
 } // namespace SeshEQ

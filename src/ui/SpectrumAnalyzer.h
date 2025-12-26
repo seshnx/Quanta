@@ -94,7 +94,7 @@ private:
     // Cached bounds
     juce::Rectangle<float> plotBounds;
     
-    static constexpr int refreshRateHz = 30;
+    static constexpr int refreshRateHz = 20;  // Balanced refresh rate for smooth updates
 };
 
 } // namespace SeshEQ

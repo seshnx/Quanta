@@ -8,7 +8,7 @@ namespace SeshEQ {
 
 LevelMeter::LevelMeter(Orientation orient)
     : orientation(orient) {
-    startTimerHz(30);
+    startTimerHz(20);  // Balanced update rate
 }
 
 LevelMeter::~LevelMeter() {
@@ -20,7 +20,7 @@ void LevelMeter::setLevel(float dB) {
     
     if (dB > peakLevel) {
         peakLevel = dB;
-        peakHoldCounter = peakHoldTime * 30 / 1000;  // Convert ms to frames at 30Hz
+        peakHoldCounter = peakHoldTime * 20 / 1000;  // Convert ms to frames at 20Hz
     }
 }
 
@@ -44,17 +44,29 @@ void LevelMeter::setPeakHold(bool enable, int holdTimeMs) {
 }
 
 void LevelMeter::timerCallback() {
-    // Smooth the level
-    smoothedLevel = smoothedLevel * smoothingCoef + currentLevel * (1.0f - smoothingCoef);
+    // Smooth the level with adaptive smoothing
+    const float targetLevel = currentLevel;
+    const float diff = std::abs(targetLevel - smoothedLevel);
+    
+    // Use heavier smoothing when close to target (idle state) to reduce jitter
+    // But not so heavy that it becomes unresponsive
+    const float adaptiveCoef = (diff < 0.1f) ? 0.92f : ((diff < 0.5f) ? 0.85f : smoothingCoef);
+    smoothedLevel = smoothedLevel * adaptiveCoef + targetLevel * (1.0f - adaptiveCoef);
+    
+    // Only repaint if change is significant (dead zone to prevent jitter)
+    static float lastPaintedLevel = -1000.0f;
+    const float paintThreshold = 0.1f;  // Reasonable threshold
+    if (std::abs(smoothedLevel - lastPaintedLevel) > paintThreshold) {
+        lastPaintedLevel = smoothedLevel;
+        repaint();
+    }
     
     // Decay peak hold
     if (peakHoldEnabled && peakHoldCounter > 0) {
         --peakHoldCounter;
     } else {
-        peakLevel = std::max(peakLevel - 1.0f, currentLevel);
+        peakLevel = std::max(peakLevel - 0.3f, currentLevel);
     }
-    
-    repaint();
 }
 
 float LevelMeter::dbToNormalized(float db) const {
@@ -64,63 +76,43 @@ float LevelMeter::dbToNormalized(float db) const {
 void LevelMeter::paint(juce::Graphics& g) {
     auto bounds = getLocalBounds().toFloat().reduced(1.0f);
     
+    // Use software rendering with high-quality settings
+    g.setImageResamplingQuality(juce::Graphics::highResamplingQuality);
+    
     // Background
     g.setColour(bgColor);
     g.fillRoundedRectangle(bounds, 2.0f);
     
-    // Calculate level position
+    // Calculate level position - Always VERTICAL
     const float levelNorm = dbToNormalized(smoothedLevel);
     const float peakNorm = dbToNormalized(peakLevel);
     const float midNorm = dbToNormalized(midThreshold);
     const float highNorm = dbToNormalized(highThreshold);
     
-    if (orientation == Orientation::Vertical) {
-        const float meterHeight = bounds.getHeight() * levelNorm;
-        
-        // Create gradient for meter
-        juce::ColourGradient gradient(
-            lowColor, 0, bounds.getBottom(),
-            highColor, 0, bounds.getY(),
-            false
-        );
-        gradient.addColour(midNorm, midColor);
-        gradient.addColour(highNorm, highColor);
-        
-        g.setGradientFill(gradient);
-        g.fillRoundedRectangle(bounds.getX(), bounds.getBottom() - meterHeight,
-                               bounds.getWidth(), meterHeight, 2.0f);
-        
-        // Peak indicator
-        if (peakHoldEnabled) {
-            const float peakY = bounds.getBottom() - bounds.getHeight() * peakNorm;
-            g.setColour(peakColor);
-            g.fillRect(bounds.getX(), peakY - 2, bounds.getWidth(), 2.0f);
-        }
-    } else {
-        const float meterWidth = bounds.getWidth() * levelNorm;
-        
-        juce::ColourGradient gradient(
-            lowColor, bounds.getX(), 0,
-            highColor, bounds.getRight(), 0,
-            false
-        );
-        gradient.addColour(midNorm, midColor);
-        gradient.addColour(highNorm, highColor);
-        
-        g.setGradientFill(gradient);
-        g.fillRoundedRectangle(bounds.getX(), bounds.getY(),
-                               meterWidth, bounds.getHeight(), 2.0f);
-        
-        // Peak indicator
-        if (peakHoldEnabled) {
-            const float peakX = bounds.getX() + bounds.getWidth() * peakNorm;
-            g.setColour(peakColor);
-            g.fillRect(peakX - 1, bounds.getY(), 2.0f, bounds.getHeight());
-        }
+    const float meterHeight = bounds.getHeight() * levelNorm;
+    
+    // Create gradient for meter (bottom to top)
+    juce::ColourGradient gradient(
+        lowColor, 0, bounds.getBottom(),
+        highColor, 0, bounds.getY(),
+        false
+    );
+    gradient.addColour(midNorm, midColor);
+    gradient.addColour(highNorm, highColor);
+    
+    g.setGradientFill(gradient);
+    g.fillRoundedRectangle(bounds.getX(), bounds.getBottom() - meterHeight,
+                           bounds.getWidth(), meterHeight, 2.0f);
+    
+    // Peak indicator (horizontal line at peak level)
+    if (peakHoldEnabled) {
+        const float peakY = bounds.getBottom() - bounds.getHeight() * peakNorm;
+        g.setColour(peakColor);
+        g.fillRect(bounds.getX(), peakY - 1.0f, bounds.getWidth(), 2.0f);
     }
     
-    // Border
-    g.setColour(juce::Colours::white.withAlpha(0.2f));
+    // Border (cyan for sci-fi theme)
+    g.setColour(juce::Colour(0xff00ffff).withAlpha(0.2f));
     g.drawRoundedRectangle(bounds, 2.0f, 1.0f);
 }
 
@@ -171,7 +163,7 @@ GainReductionMeter::GainReductionMeter() {
     valueLabel.setColour(juce::Label::textColourId, textColor);
     valueLabel.setFont(juce::Font(11.0f));
     
-    startTimerHz(30);
+    startTimerHz(20);  // Balanced update rate
 }
 
 GainReductionMeter::~GainReductionMeter() {
@@ -196,62 +188,204 @@ void GainReductionMeter::setColor(juce::Colour color) {
 }
 
 void GainReductionMeter::timerCallback() {
-    // Smooth the GR
-    smoothedGR = smoothedGR * 0.7f + currentGR * 0.3f;
+    // Smooth the GR with adaptive smoothing
+    const float targetGR = currentGR;
+    const float diff = std::abs(targetGR - smoothedGR);
+    
+    // Use heavier smoothing when close to target (idle state) to reduce jitter
+    const float adaptiveCoef = (diff < 0.1f) ? 0.92f : ((diff < 0.5f) ? 0.85f : 0.8f);
+    smoothedGR = smoothedGR * adaptiveCoef + targetGR * (1.0f - adaptiveCoef);
+    
+    // Only repaint if change is significant (dead zone to prevent jitter)
+    static float lastPaintedGR = 0.0f;
+    const float paintThreshold = 0.1f;  // Reasonable threshold
+    if (std::abs(smoothedGR - lastPaintedGR) > paintThreshold) {
+        lastPaintedGR = smoothedGR;
+        repaint();
+    }
     
     // Decay peak hold
     if (peakHoldCounter > 0) {
         --peakHoldCounter;
     } else {
-        peakGR = std::min(peakGR + 0.5f, currentGR);
+        peakGR = std::min(peakGR + 0.3f, currentGR);
     }
     
-    // Update label
-    juce::String text = (currentGR < -0.1f) 
-        ? juce::String(currentGR, 1) + " dB"
-        : "0 dB";
-    valueLabel.setText(text, juce::dontSendNotification);
-    
-    repaint();
+    // Update label less frequently to reduce CPU
+    static int labelUpdateCounter = 0;
+    if (++labelUpdateCounter >= 3) {  // Update label every 3 callbacks (~7Hz)
+        juce::String text = (smoothedGR < -0.1f) 
+            ? juce::String(smoothedGR, 1) + " dB"
+            : "0 dB";
+        valueLabel.setText(text, juce::dontSendNotification);
+        labelUpdateCounter = 0;
+    }
 }
 
 void GainReductionMeter::paint(juce::Graphics& g) {
     auto bounds = getLocalBounds().toFloat();
     auto meterBounds = bounds.removeFromTop(bounds.getHeight() - 18);
     
+    // Use software rendering with high-quality settings
+    g.setImageResamplingQuality(juce::Graphics::highResamplingQuality);
+    
     // Background
     g.setColour(bgColor);
     g.fillRoundedRectangle(meterBounds, 3.0f);
     
-    // Meter (fills from right to left to show reduction)
+    // Meter - VERTICAL (fills from bottom up to show reduction)
     if (smoothedGR < -0.1f) {
         const float grNorm = std::clamp(-smoothedGR / -maxRange, 0.0f, 1.0f);
-        const float meterWidth = meterBounds.getWidth() * grNorm;
+        const float meterHeight = meterBounds.getHeight() * grNorm;
         
-        g.setColour(meterColor);
+        // Gradient for gain reduction meter (bottom to top)
+        juce::ColourGradient gradient(
+            meterColor.withAlpha(0.7f), 0, meterBounds.getBottom(),
+            meterColor, 0, meterBounds.getBottom() - meterHeight,
+            false
+        );
+        g.setGradientFill(gradient);
         g.fillRoundedRectangle(
-            meterBounds.getRight() - meterWidth, meterBounds.getY(),
-            meterWidth, meterBounds.getHeight(),
+            meterBounds.getX(), meterBounds.getBottom() - meterHeight,
+            meterBounds.getWidth(), meterHeight,
             3.0f
         );
     }
     
-    // Peak indicator
+    // Peak indicator - VERTICAL (horizontal line at peak level)
     if (peakGR < -0.1f) {
         const float peakNorm = std::clamp(-peakGR / -maxRange, 0.0f, 1.0f);
-        const float peakX = meterBounds.getRight() - meterBounds.getWidth() * peakNorm;
+        const float peakY = meterBounds.getBottom() - meterBounds.getHeight() * peakNorm;
         
         g.setColour(juce::Colours::white);
-        g.fillRect(peakX - 1, meterBounds.getY(), 2.0f, meterBounds.getHeight());
+        g.fillRect(meterBounds.getX(), peakY - 1.0f, meterBounds.getWidth(), 2.0f);
     }
     
-    // Border
-    g.setColour(juce::Colours::white.withAlpha(0.3f));
+    // Border (cyan for sci-fi theme)
+    g.setColour(juce::Colour(0xff00ffff).withAlpha(0.2f));
     g.drawRoundedRectangle(meterBounds, 3.0f, 1.0f);
 }
 
 void GainReductionMeter::resized() {
     auto bounds = getLocalBounds();
+    valueLabel.setBounds(bounds.removeFromBottom(18));
+}
+
+//==============================================================================
+// TruePeakMeter
+//==============================================================================
+
+TruePeakMeter::TruePeakMeter() {
+    addAndMakeVisible(valueLabel);
+    addAndMakeVisible(titleLabel);
+    
+    valueLabel.setJustificationType(juce::Justification::centred);
+    valueLabel.setColour(juce::Label::textColourId, juce::Colour(0xff00ffff)); // Cyan
+    valueLabel.setFont(juce::Font(11.0f).boldened());
+    valueLabel.setText("-∞", juce::dontSendNotification);
+    
+    titleLabel.setJustificationType(juce::Justification::centred);
+    titleLabel.setColour(juce::Label::textColourId, juce::Colour(0xff00ffff)); // Cyan
+    titleLabel.setFont(juce::Font(9.0f));
+    
+    startTimerHz(20);  // Balanced update rate
+}
+
+TruePeakMeter::~TruePeakMeter() {
+    stopTimer();
+}
+
+void TruePeakMeter::setTruePeak(float dB) {
+    currentLevel = dB;
+    
+    if (dB > peakLevel) {
+        peakLevel = dB;
+        peakHoldCounter = peakHoldTime;
+    }
+}
+
+void TruePeakMeter::setRange(float min, float max) {
+    minDb = min;
+    maxDb = max;
+}
+
+void TruePeakMeter::timerCallback() {
+    // Smooth the level with adaptive smoothing
+    const float targetLevel = currentLevel;
+    const float diff = std::abs(targetLevel - smoothedLevel);
+    
+    // Use heavier smoothing when close to target (idle state) to reduce jitter
+    const float adaptiveCoef = (diff < 0.1f) ? 0.92f : ((diff < 0.5f) ? 0.85f : smoothingCoef);
+    smoothedLevel = smoothedLevel * adaptiveCoef + targetLevel * (1.0f - adaptiveCoef);
+    
+    // Only repaint if change is significant (dead zone to prevent jitter)
+    static float lastPaintedLevel = -1000.0f;
+    const float paintThreshold = 0.1f;  // Reasonable threshold
+    if (std::abs(smoothedLevel - lastPaintedLevel) > paintThreshold) {
+        lastPaintedLevel = smoothedLevel;
+        repaint();
+    }
+    
+    if (peakHoldCounter > 0) {
+        --peakHoldCounter;
+    } else {
+        peakLevel = std::max(peakLevel - 0.3f, currentLevel);
+    }
+    
+    // Update label less frequently to reduce CPU
+    static int labelUpdateCounter = 0;
+    if (++labelUpdateCounter >= 3) {  // Update label every 3 callbacks (~7Hz)
+        if (smoothedLevel < minDb) {
+            valueLabel.setText("-∞", juce::dontSendNotification);
+        } else {
+            valueLabel.setText(juce::String(smoothedLevel, 1) + " dB", juce::dontSendNotification);
+        }
+        labelUpdateCounter = 0;
+    }
+}
+
+void TruePeakMeter::paint(juce::Graphics& g) {
+    auto bounds = getLocalBounds().toFloat().reduced(2.0f);
+    
+    // Use software rendering with high-quality settings
+    g.setImageResamplingQuality(juce::Graphics::highResamplingQuality);
+    
+    // Background
+    g.setColour(juce::Colour(0xff000000)); // Black
+    g.fillRoundedRectangle(bounds, 3.0f);
+    
+    // Border (cyan)
+    g.setColour(juce::Colour(0xff00ffff).withAlpha(0.5f));
+    g.drawRoundedRectangle(bounds, 3.0f, 1.5f);
+    
+    // Meter bar - VERTICAL orientation (bottom to top)
+    const float levelNorm = std::clamp((smoothedLevel - minDb) / (maxDb - minDb), 0.0f, 1.0f);
+    const float meterHeight = bounds.getHeight() * levelNorm;
+    
+    if (meterHeight > 0.0f) {
+        // Gradient from cyan (bottom) to white (top)
+        juce::ColourGradient gradient(
+            juce::Colour(0xff00ffff), 0, bounds.getBottom(),
+            juce::Colour(0xffffffff), 0, bounds.getY(),
+            false
+        );
+        g.setGradientFill(gradient);
+        g.fillRoundedRectangle(bounds.getX(), bounds.getBottom() - meterHeight, 
+                               bounds.getWidth(), meterHeight, 2.0f);
+    }
+    
+    // Peak indicator - VERTICAL (horizontal line at peak level)
+    if (peakHoldCounter > 0) {
+        const float peakNorm = std::clamp((peakLevel - minDb) / (maxDb - minDb), 0.0f, 1.0f);
+        const float peakY = bounds.getBottom() - bounds.getHeight() * peakNorm;
+        g.setColour(juce::Colour(0xffffffff));
+        g.fillRect(bounds.getX(), peakY - 1.0f, bounds.getWidth(), 2.0f);
+    }
+}
+
+void TruePeakMeter::resized() {
+    auto bounds = getLocalBounds();
+    titleLabel.setBounds(bounds.removeFromTop(14));
     valueLabel.setBounds(bounds.removeFromBottom(18));
 }
 
@@ -265,15 +399,22 @@ DynamicsMeterPanel::DynamicsMeterPanel() {
     addAndMakeVisible(limiterMeter);
     addAndMakeVisible(inputMeter);
     addAndMakeVisible(outputMeter);
+    addAndMakeVisible(truePeakMeter);
     
-    compMeter.setColor(juce::Colour(0xffff6b6b));
-    gateMeter.setColor(juce::Colour(0xffffd43b));
-    limiterMeter.setColor(juce::Colour(0xff4dabf7));
+    // Set meter colors (sci-fi theme - cyan variations)
+    compMeter.setColor(juce::Colour(0xff00ffff)); // Cyan
+    gateMeter.setColor(juce::Colour(0xff88ffff)); // Light Cyan
+    limiterMeter.setColor(juce::Colour(0xff00ccff)); // Cyan-Blue
+    truePeakMeter.setRange(-60.0f, 6.0f);
+    
+    // Ensure all level meters are vertical
+    inputMeter.setRange(-60.0f, 6.0f);
+    outputMeter.setRange(-60.0f, 6.0f);
     
     for (auto* label : { &compLabel, &gateLabel, &limiterLabel, &inputLabel, &outputLabel }) {
         addAndMakeVisible(label);
         label->setJustificationType(juce::Justification::centred);
-        label->setColour(juce::Label::textColourId, juce::Colours::white.withAlpha(0.7f));
+        label->setColour(juce::Label::textColourId, juce::Colour(0xff00ffff).withAlpha(0.8f)); // Cyan
         label->setFont(juce::Font(10.0f));
     }
 }
@@ -298,25 +439,31 @@ void DynamicsMeterPanel::setOutputLevel(float dB) {
     outputMeter.setLevel(dB);
 }
 
+void DynamicsMeterPanel::setTruePeak(float dB) {
+    truePeakMeter.setTruePeak(dB);
+}
+
 void DynamicsMeterPanel::paint(juce::Graphics& g) {
-    g.fillAll(juce::Colour(0xff1a1a2e));
+    // Use software rendering with high-quality settings
+    g.setImageResamplingQuality(juce::Graphics::highResamplingQuality);
     
-    // Section dividers
-    g.setColour(juce::Colours::white.withAlpha(0.1f));
+    g.fillAll(juce::Colour(0xff000000)); // Black background
+    
+    // Section dividers (cyan)
+    g.setColour(juce::Colour(0xff00ffff).withAlpha(0.2f));
     
     auto bounds = getLocalBounds();
-    const int sectionWidth = bounds.getWidth() / 5;
+    const int sectionWidth = bounds.getWidth() / 6; // 6 sections now (added True Peak)
     
-    for (int i = 1; i < 5; ++i) {
+    for (int i = 1; i < 6; ++i) {
         g.drawVerticalLine(sectionWidth * i, 0.0f, static_cast<float>(bounds.getHeight()));
     }
 }
 
 void DynamicsMeterPanel::resized() {
     auto bounds = getLocalBounds().reduced(4);
-    const int sectionWidth = bounds.getWidth() / 5;
+    const int sectionWidth = bounds.getWidth() / 6; // 6 sections now
     const int labelHeight = 14;
-    const int meterHeight = bounds.getHeight() - labelHeight - 4;
     
     // Input meter
     auto inputArea = bounds.removeFromLeft(sectionWidth).reduced(2);
@@ -339,9 +486,13 @@ void DynamicsMeterPanel::resized() {
     limiterMeter.setBounds(limArea);
     
     // Output meter
-    auto outputArea = bounds.reduced(2);
+    auto outputArea = bounds.removeFromLeft(sectionWidth).reduced(2);
     outputLabel.setBounds(outputArea.removeFromBottom(labelHeight));
     outputMeter.setBounds(outputArea);
+    
+    // True Peak meter
+    auto truePeakArea = bounds.reduced(2);
+    truePeakMeter.setBounds(truePeakArea);
 }
 
 } // namespace SeshEQ

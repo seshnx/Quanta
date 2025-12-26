@@ -17,7 +17,7 @@ void Gate::reset() {
     state = GateState::Closed;
     currentGain = 0.0f;
     holdCounter = 0;
-    gainReductionDb = rangeDb;
+    gainReductionDb.store(0.0f);  // No reduction when reset (not rangeDb which causes glitches)
 }
 
 void Gate::setThreshold(float dB) {
@@ -74,7 +74,7 @@ void Gate::updateCoefficients() {
 
 void Gate::process(juce::AudioBuffer<float>& buffer) {
     if (!enabled) {
-        gainReductionDb = 0.0f;
+        gainReductionDb.store(0.0f);
         return;
     }
     
@@ -184,7 +184,7 @@ void Gate::process(juce::AudioBuffer<float>& buffer) {
         }
     }
     
-    gainReductionDb = maxGainReduction;
+    gainReductionDb.store(maxGainReduction);
 }
 
 void Gate::connectToParameters(juce::AudioProcessorValueTreeState& apvts) {

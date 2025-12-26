@@ -38,6 +38,9 @@ SeshLookAndFeel::SeshLookAndFeel() {
 void SeshLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int width, int height,
                                         float sliderPosProportional, float rotaryStartAngle,
                                         float rotaryEndAngle, juce::Slider& slider) {
+    // Use software rendering with high-quality settings
+    g.setImageResamplingQuality(juce::Graphics::highResamplingQuality);
+    
     const float radius = static_cast<float>(juce::jmin(width / 2, height / 2)) - 4.0f;
     const float centreX = static_cast<float>(x) + static_cast<float>(width) * 0.5f;
     const float centreY = static_cast<float>(y) + static_cast<float>(height) * 0.5f;
@@ -87,6 +90,9 @@ void SeshLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int widt
 void SeshLookAndFeel::drawLinearSlider(juce::Graphics& g, int x, int y, int width, int height,
                                         float sliderPos, float /*minSliderPos*/, float /*maxSliderPos*/,
                                         juce::Slider::SliderStyle style, juce::Slider& slider) {
+    // Use software rendering with high-quality settings
+    g.setImageResamplingQuality(juce::Graphics::highResamplingQuality);
+    
     const bool isEnabled = slider.isEnabled();
     const bool isHorizontal = (style == juce::Slider::LinearHorizontal ||
                                style == juce::Slider::LinearBar);

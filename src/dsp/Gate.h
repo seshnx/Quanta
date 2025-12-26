@@ -2,6 +2,7 @@
 
 #include "LevelDetector.h"
 #include <juce_audio_processors/juce_audio_processors.h>
+#include <atomic>
 
 namespace SeshEQ {
 
@@ -33,7 +34,7 @@ public:
     void process(juce::AudioBuffer<float>& buffer);
     
     // Get current gain reduction for metering
-    float getGainReduction() const { return gainReductionDb; }
+    float getGainReduction() const { return gainReductionDb.load(); }
     
     // Connect to APVTS
     void connectToParameters(juce::AudioProcessorValueTreeState& apvts);
@@ -62,7 +63,7 @@ private:
     
     // State
     GateState state = GateState::Closed;
-    float gainReductionDb = 0.0f;
+    std::atomic<float> gainReductionDb { 0.0f };
     float currentGain = 0.0f;  // Linear gain (0 to 1)
     int holdCounter = 0;
     int holdSamples = 0;

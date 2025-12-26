@@ -57,6 +57,11 @@ public:
      */
     void setSelectedBand(int band);
     
+    /**
+     * @brief Set gain reduction for a band (for metering)
+     */
+    void setBandGainReduction(int bandIndex, float dB);
+    
     // Component overrides
     void paint(juce::Graphics& g) override;
     void resized() override;
@@ -79,6 +84,7 @@ private:
     void drawCurve(juce::Graphics& g);
     void drawBandCurves(juce::Graphics& g);
     void drawNodes(juce::Graphics& g);
+    void drawBandGRMeters(juce::Graphics& g);
     juce::Path createResponseCurve() const;
     juce::Path createBandCurve(int bandIndex) const;
     
@@ -106,26 +112,29 @@ private:
     float dragStartFreq = 0.0f;
     float dragStartGain = 0.0f;
     
-    // Colors
-    juce::Colour curveColor { 0xffffffff };
-    juce::Colour fillColor { 0x20ffffff };
-    juce::Colour gridColor { 0x30ffffff };
-    juce::Colour textColor { 0x80ffffff };
-    juce::Colour nodeColor { 0xffffffff };
-    juce::Colour nodeSelectedColor { 0xff00ff88 };
-    juce::Colour nodeHoverColor { 0xffffcc00 };
+    // Colors (sci-fi theme)
+    juce::Colour curveColor { 0xffffffff };  // White
+    juce::Colour fillColor { 0x2000ffff };  // Cyan with transparency
+    juce::Colour gridColor { 0x3000ffff };  // Cyan grid
+    juce::Colour textColor { 0x8000ffff };  // Cyan text
+    juce::Colour nodeColor { 0xffffffff };  // White
+    juce::Colour nodeSelectedColor { 0xff00ffff };  // Cyan
+    juce::Colour nodeHoverColor { 0xff88ffff };  // Light Cyan
     
-    // Band colors for individual curves
+    // Band colors for individual curves (sci-fi cyan theme)
     std::array<juce::Colour, Constants::numEQBands> bandColors = {
-        juce::Colour(0xffff6b6b),  // Red
-        juce::Colour(0xffffa94d),  // Orange
-        juce::Colour(0xffffd43b),  // Yellow
-        juce::Colour(0xff69db7c),  // Green
-        juce::Colour(0xff4dabf7),  // Blue
-        juce::Colour(0xff9775fa),  // Purple
-        juce::Colour(0xfff06595),  // Pink
-        juce::Colour(0xff20c997),  // Teal
+        juce::Colour(0xff00ffff),  // Band 1 - Pure Cyan
+        juce::Colour(0xff00cccc),  // Band 2 - Dark Cyan
+        juce::Colour(0xff88ffff),  // Band 3 - Light Cyan
+        juce::Colour(0xff00ffcc),  // Band 4 - Cyan-Green
+        juce::Colour(0xff00ccff),  // Band 5 - Cyan-Blue
+        juce::Colour(0xffccffff),  // Band 6 - Very Light Cyan
+        juce::Colour(0xff66ffff),  // Band 7 - Medium Cyan
+        juce::Colour(0xff00ffff),  // Band 8 - Pure Cyan
     };
+    
+    // Per-band gain reduction values (for metering)
+    std::array<float, Constants::numEQBands> bandGainReduction = { 0.0f };
     
     // Node radius
     static constexpr float nodeRadius = 8.0f;
@@ -133,6 +142,13 @@ private:
     
     // Cached bounds
     juce::Rectangle<float> plotBounds;
+    
+    // Cached paths to avoid recalculating on every repaint
+    mutable juce::Path cachedResponsePath;
+    mutable std::array<juce::Path, Constants::numEQBands> cachedBandPaths;
+    mutable bool responsePathValid = false;
+    mutable std::array<bool, Constants::numEQBands> bandPathsValid = { false };
+    mutable std::array<EQProcessor::BandParams, Constants::numEQBands> lastBandParams;
     
     // Callback
     std::function<void(int)> onBandSelected;

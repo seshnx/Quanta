@@ -44,20 +44,30 @@ void SpectrumAnalyzer::setDbRange(float min, float max) {
 }
 
 void SpectrumAnalyzer::timerCallback() {
+    // Always check for new data and repaint if available
+    // The FFT processors handle the "new data" flag correctly
     bool needsRepaint = false;
     
-    if (fftProcessor && fftProcessor->isNewDataAvailable())
+    if (fftProcessor && fftProcessor->isNewDataAvailable()) {
         needsRepaint = true;
-    if (preFFT && preFFT->isNewDataAvailable())
+    }
+    if (preFFT && preFFT->isNewDataAvailable()) {
         needsRepaint = true;
-    if (postFFT && postFFT->isNewDataAvailable())
+    }
+    if (postFFT && postFFT->isNewDataAvailable()) {
         needsRepaint = true;
+    }
     
-    if (needsRepaint)
+    // Repaint immediately when new data is available
+    // The refresh rate (15Hz) already provides natural throttling
+    if (needsRepaint) {
         repaint();
+    }
 }
 
 void SpectrumAnalyzer::paint(juce::Graphics& g) {
+    // Use software rendering with high-quality settings for smooth spectrum display
+    g.setImageResamplingQuality(juce::Graphics::highResamplingQuality);
     drawBackground(g);
     drawGrid(g);
     
@@ -66,7 +76,7 @@ void SpectrumAnalyzer::paint(juce::Graphics& g) {
         drawSpectrum(g, preFFT, preColor, false);
     }
     
-    // Draw post-EQ spectrum
+    // Draw post-EQ spectrum (final output only)
     if (postFFT) {
         drawSpectrum(g, postFFT, postColor, true);
     } else if (fftProcessor) {

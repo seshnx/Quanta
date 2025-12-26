@@ -50,6 +50,36 @@ void ParameterLayout::addGlobalParameters(juce::AudioProcessorValueTreeState::Pa
         "Bypass",
         false
     ));
+    
+    // Advanced Features
+    // Mid/Side Mode
+    layout.add(std::make_unique<juce::AudioParameterBool>(
+        juce::ParameterID(midSideMode, 1),
+        "Mid/Side Mode",
+        false
+    ));
+    
+    // Linear Phase Mode
+    layout.add(std::make_unique<juce::AudioParameterBool>(
+        juce::ParameterID(linearPhaseMode, 1),
+        "Linear Phase Mode",
+        false
+    ));
+    
+    // Dynamic EQ Mode
+    layout.add(std::make_unique<juce::AudioParameterBool>(
+        juce::ParameterID(dynamicEQMode, 1),
+        "Dynamic EQ Mode",
+        false
+    ));
+
+    // Global Oversampling Factor (1x, 2x, 4x, 8x)
+    layout.add(std::make_unique<juce::AudioParameterChoice>(
+        juce::ParameterID(oversamplingFactor, 1),
+        "Oversampling",
+        getOversamplingNames(),
+        0  // Default to 1x (off)
+    ));
 }
 
 void ParameterLayout::addEQParameters(juce::AudioProcessorValueTreeState::ParameterLayout& layout) {
@@ -107,6 +137,66 @@ void ParameterLayout::addEQParameters(juce::AudioProcessorValueTreeState::Parame
             juce::ParameterID(getBandParamID(i, bandEnable), 1),
             "Band " + bandStr + " Enable",
             true
+        ));
+        
+        // Dynamic EQ parameters (per band)
+        // Threshold: -60 to 0 dB
+        layout.add(std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID(getBandParamID(i, bandDynThreshold), 1),
+            "Band " + bandStr + " Dyn Threshold",
+            juce::NormalisableRange<float>(-60.0f, 0.0f, 0.1f),
+            -12.0f,
+            juce::AudioParameterFloatAttributes().withLabel("dB")
+        ));
+        
+        // Ratio: 0.1:1 (expansion) to 10:1 (compression)
+        // Values < 1.0 = Expander mode, Values > 1.0 = Compressor mode
+        juce::NormalisableRange<float> dynRatioRange(0.1f, 10.0f, 0.1f);
+        dynRatioRange.setSkewForCentre(1.0f); // Center at 1:1 (unity)
+        layout.add(std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID(getBandParamID(i, bandDynRatio), 1),
+            "Band " + bandStr + " Dyn Ratio",
+            dynRatioRange,
+            2.0f,
+            juce::AudioParameterFloatAttributes().withLabel(":1")
+        ));
+        
+        // Attack: 0.01 to 100 ms
+        juce::NormalisableRange<float> dynAttackRange(0.01f, 100.0f, 0.01f);
+        dynAttackRange.setSkewForCentre(10.0f);
+        layout.add(std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID(getBandParamID(i, bandDynAttack), 1),
+            "Band " + bandStr + " Dyn Attack",
+            dynAttackRange,
+            10.0f,
+            juce::AudioParameterFloatAttributes().withLabel("ms")
+        ));
+        
+        // Release: 10 to 1000 ms
+        juce::NormalisableRange<float> dynReleaseRange(10.0f, 1000.0f, 1.0f);
+        dynReleaseRange.setSkewForCentre(100.0f);
+        layout.add(std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID(getBandParamID(i, bandDynRelease), 1),
+            "Band " + bandStr + " Dyn Release",
+            dynReleaseRange,
+            100.0f,
+            juce::AudioParameterFloatAttributes().withLabel("ms")
+        ));
+        
+        // Knee: 0 to 12 dB
+        layout.add(std::make_unique<juce::AudioParameterFloat>(
+            juce::ParameterID(getBandParamID(i, bandDynKnee), 1),
+            "Band " + bandStr + " Dyn Knee",
+            juce::NormalisableRange<float>(0.0f, 12.0f, 0.1f),
+            3.0f,
+            juce::AudioParameterFloatAttributes().withLabel("dB")
+        ));
+        
+        // Dynamic Enable
+        layout.add(std::make_unique<juce::AudioParameterBool>(
+            juce::ParameterID(getBandParamID(i, bandDynEnable), 1),
+            "Band " + bandStr + " Dyn Enable",
+            false
         ));
     }
 }
@@ -267,6 +357,15 @@ void ParameterLayout::addGateParameters(juce::AudioProcessorValueTreeState::Para
 void ParameterLayout::addLimiterParameters(juce::AudioProcessorValueTreeState::ParameterLayout& layout) {
     using namespace ParamIDs;
     using namespace Constants;
+    
+    // Threshold: -12 to 0 dB (True Peak Limiter)
+    layout.add(std::make_unique<juce::AudioParameterFloat>(
+        juce::ParameterID(limiterThreshold, 1),
+        "Limiter Threshold",
+        juce::NormalisableRange<float>(-12.0f, 0.0f, 0.1f),
+        -3.0f,
+        juce::AudioParameterFloatAttributes().withLabel("dB")
+    ));
     
     // Ceiling: -12 to 0 dB
     layout.add(std::make_unique<juce::AudioParameterFloat>(

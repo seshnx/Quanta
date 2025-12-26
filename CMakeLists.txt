@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 
-project(SeshEQ VERSION 1.0.0 LANGUAGES CXX)
+project(SeshNxQuanta VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -30,8 +30,12 @@ set(PLUGIN_SOURCES
     src/dsp/Compressor.cpp
     src/dsp/Gate.cpp
     src/dsp/Limiter.cpp
+    src/dsp/LinearPhaseEQ.cpp
+    src/dsp/DynamicEQ.cpp
+    src/dsp/BandDynamics.cpp
     src/utils/Parameters.cpp
     src/utils/FFTProcessor.cpp
+    src/utils/PresetManager.cpp
     src/ui/SpectrumAnalyzer.cpp
     src/ui/EQCurveDisplay.cpp
     src/ui/MeterComponent.cpp
@@ -47,9 +51,14 @@ set(PLUGIN_HEADERS
     src/dsp/Compressor.h
     src/dsp/Gate.h
     src/dsp/Limiter.h
+    src/dsp/LinearPhaseEQ.h
+    src/dsp/DynamicEQ.h
+    src/dsp/BandDynamics.h
     src/utils/Parameters.h
     src/utils/SmoothValue.h
     src/utils/FFTProcessor.h
+    src/utils/MidSideProcessor.h
+    src/utils/PresetManager.h
     src/ui/SpectrumAnalyzer.h
     src/ui/EQCurveDisplay.h
     src/ui/MeterComponent.h
@@ -57,38 +66,41 @@ set(PLUGIN_HEADERS
 )
 
 # Define the plugin
-juce_add_plugin(SeshEQ
+juce_add_plugin(SeshNxQuanta
     COMPANY_NAME "SeshAudio"
     IS_SYNTH FALSE
     NEEDS_MIDI_INPUT FALSE
     NEEDS_MIDI_OUTPUT FALSE
     IS_MIDI_EFFECT FALSE
     EDITOR_WANTS_KEYBOARD_FOCUS FALSE
-    COPY_PLUGIN_AFTER_BUILD TRUE
+    COPY_PLUGIN_AFTER_BUILD FALSE
     PLUGIN_MANUFACTURER_CODE Sesh
-    PLUGIN_CODE SEQ1
+    PLUGIN_CODE SNQ1
     FORMATS VST3 Standalone
-    PRODUCT_NAME "SeshEQ"
+    PRODUCT_NAME "SeshNx Quanta"
 )
 
 # Add sources
-target_sources(SeshEQ
+target_sources(SeshNxQuanta
     PRIVATE
         ${PLUGIN_SOURCES}
         ${PLUGIN_HEADERS}
 )
 
 # Preprocessor definitions
-target_compile_definitions(SeshEQ
+target_compile_definitions(SeshNxQuanta
     PUBLIC
         JUCE_WEB_BROWSER=0
         JUCE_USE_CURL=0
         JUCE_VST3_CAN_REPLACE_VST2=0
         JUCE_DISPLAY_SPLASH_SCREEN=0
+        JUCE_USE_DIRECTWRITE=0
+        JUCE_DIRECT2D=0
+        JUCE_USE_OPENGL=0
 )
 
 # Link JUCE modules
-target_link_libraries(SeshEQ
+target_link_libraries(SeshNxQuanta
     PRIVATE
         juce::juce_audio_utils
         juce::juce_dsp
@@ -99,7 +111,7 @@ target_link_libraries(SeshEQ
 )
 
 # Include directories
-target_include_directories(SeshEQ
+target_include_directories(SeshNxQuanta
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
@@ -116,34 +128,34 @@ if(BUILD_TESTS)
 
     enable_testing()
 
-    add_executable(SeshEQ_Tests
+    add_executable(SeshNxQuanta_Tests
         tests/BiquadFilterTests.cpp
         tests/LevelDetectorTests.cpp
         src/dsp/BiquadFilter.cpp
         src/dsp/LevelDetector.cpp
     )
 
-    target_include_directories(SeshEQ_Tests
+    target_include_directories(SeshNxQuanta_Tests
         PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/src
     )
 
-    target_link_libraries(SeshEQ_Tests
+    target_link_libraries(SeshNxQuanta_Tests
         PRIVATE
             GTest::gtest_main
             GTest::gmock
     )
 
-    target_compile_definitions(SeshEQ_Tests
+    target_compile_definitions(SeshNxQuanta_Tests
         PRIVATE
-            SESHEQ_TESTING=1
+            SESHNXQUANTA_TESTING=1
     )
 
     include(GoogleTest)
-    gtest_discover_tests(SeshEQ_Tests)
+    gtest_discover_tests(SeshNxQuanta_Tests)
 endif()
 
 # Print build info
-message(STATUS "SeshEQ Version: ${PROJECT_VERSION}")
+message(STATUS "SeshNx Quanta Version: ${PROJECT_VERSION}")
 message(STATUS "Build Type: ${CMAKE_BUILD_TYPE}")
 message(STATUS "C++ Standard: ${CMAKE_CXX_STANDARD}")

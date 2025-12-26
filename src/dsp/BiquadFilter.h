@@ -87,13 +87,26 @@ public:
      * @return Magnitude (linear scale)
      */
     float getMagnitudeAtFrequency(float frequency) const;
-    
+
     /**
      * @brief Get the phase response at a given frequency
      * @param frequency Frequency in Hz
      * @return Phase in radians
      */
     float getPhaseAtFrequency(float frequency) const;
+
+    /**
+     * @brief Calculate magnitude from parameters (static, no filter state needed)
+     * @param type Filter type
+     * @param frequency Center frequency in Hz
+     * @param q Q factor
+     * @param gainDb Gain in dB
+     * @param sampleRate Sample rate
+     * @param evalFrequency Frequency to evaluate magnitude at
+     * @return Magnitude (linear scale)
+     */
+    static float calcMagnitudeFromParams(FilterType type, float frequency, float q,
+                                          float gainDb, double sampleRate, float evalFrequency);
     
     // Getters for current parameters
     FilterType getType() const { return currentType; }

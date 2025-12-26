@@ -1,25 +1,22 @@
 #pragma once
 
-#include "LevelDetector.h"
-#include "utils/SmoothValue.h"
+#include "Compressor.h"
+#include "utils/Parameters.h"
 #include <juce_audio_processors/juce_audio_processors.h>
 #include <atomic>
 
 namespace SeshEQ {
 
 /**
- * @brief Feed-forward compressor with soft knee
+ * @brief Per-band dynamics processor (Compressor/Expander)
  * 
- * Features:
- * - Threshold, ratio, attack, release, knee
- * - Makeup gain
- * - Parallel mix (dry/wet)
- * - Peak/RMS detection
- * - Sidechain support (future)
+ * Each EQ band can have its own dynamics processing with:
+ * - Threshold, Ratio, Attack, Release, Knee
+ * - Independent gain reduction metering
  */
-class Compressor {
+class BandDynamics {
 public:
-    Compressor() = default;
+    BandDynamics() = default;
     
     void prepare(double sampleRate, int samplesPerBlock);
     void reset();
@@ -30,39 +27,30 @@ public:
     void setAttack(float ms);
     void setRelease(float ms);
     void setKnee(float dB);
-    void setMakeupGain(float dB);
-    void setMix(float percent);  // 0-100
-    void setDetectionMode(DetectionMode mode);
     void setEnabled(bool enabled);
     
-    // Process audio
+    // Process audio for a single band
     void process(juce::AudioBuffer<float>& buffer);
     
-    // Get current gain reduction in dB (for metering)
+    // Get current gain reduction for metering
     float getGainReduction() const { return gainReductionDb.load(); }
     
     // Connect to APVTS
-    void connectToParameters(juce::AudioProcessorValueTreeState& apvts);
+    void connectToParameters(juce::AudioProcessorValueTreeState& apvts, int bandIndex);
     void updateFromParameters();
     
     bool isEnabled() const { return enabled; }
     
 private:
-    // Calculate gain reduction for a given input level (dB)
-    float computeGain(float inputDb) const;
-    
-    LevelDetector levelDetector;
+    Compressor compressor;
     
     // Parameters
-    float thresholdDb = -18.0f;
-    float ratio = 4.0f;
-    float kneeDb = 6.0f;
-    float makeupGainDb = 0.0f;
-    float mix = 1.0f;  // 0-1
+    float thresholdDb = -12.0f;
+    float ratio = 2.0f;
+    float attackMs = 10.0f;
+    float releaseMs = 100.0f;
+    float kneeDb = 3.0f;
     bool enabled = false;
-    
-    // Smoothed parameters
-    SmoothGain<float> makeupGain;
     
     // State
     std::atomic<float> gainReductionDb { 0.0f };
@@ -74,9 +62,8 @@ private:
     std::atomic<float>* attackParam = nullptr;
     std::atomic<float>* releaseParam = nullptr;
     std::atomic<float>* kneeParam = nullptr;
-    std::atomic<float>* makeupParam = nullptr;
-    std::atomic<float>* mixParam = nullptr;
     std::atomic<float>* enabledParam = nullptr;
 };
 
 } // namespace SeshEQ
+

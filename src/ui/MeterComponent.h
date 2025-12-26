@@ -56,9 +56,9 @@ private:
     int peakHoldTime = 2000;
     int peakHoldCounter = 0;
     
-    // Smoothing
+    // Smoothing (increased for smoother display)
     float smoothedLevel = -100.0f;
-    float smoothingCoef = 0.3f;
+    float smoothingCoef = 0.7f;  // Increased for smoother, less jittery updates
     
     // Colors
     juce::Colour bgColor { 0xff1a1a2e };
@@ -137,6 +137,47 @@ private:
 };
 
 /**
+ * @brief True Peak meter component
+ */
+class TruePeakMeter : public juce::Component,
+                      private juce::Timer {
+public:
+    TruePeakMeter();
+    ~TruePeakMeter() override;
+    
+    /**
+     * @brief Set current True Peak level in dB
+     */
+    void setTruePeak(float dB);
+    
+    /**
+     * @brief Set the range in dB
+     */
+    void setRange(float minDb, float maxDb);
+    
+    // Component overrides
+    void paint(juce::Graphics& g) override;
+    void resized() override;
+    
+private:
+    void timerCallback() override;
+    
+    float currentLevel = -100.0f;
+    float peakLevel = -100.0f;
+    float minDb = -60.0f;
+    float maxDb = 6.0f;
+    
+    int peakHoldCounter = 0;
+    int peakHoldTime = 60;  // frames at 30Hz
+    
+    float smoothedLevel = -100.0f;
+    float smoothingCoef = 0.7f;  // Increased for smoother, less jittery updates
+    
+    juce::Label valueLabel;
+    juce::Label titleLabel { {}, "TRUE PEAK" };
+};
+
+/**
  * @brief Combined dynamics meter panel
  */
 class DynamicsMeterPanel : public juce::Component {
@@ -148,6 +189,7 @@ public:
     void setLimiterGR(float dB);
     void setInputLevel(float dB);
     void setOutputLevel(float dB);
+    void setTruePeak(float dB);
     
     void paint(juce::Graphics& g) override;
     void resized() override;
@@ -158,6 +200,7 @@ private:
     GainReductionMeter limiterMeter;
     LevelMeter inputMeter;
     LevelMeter outputMeter;
+    TruePeakMeter truePeakMeter;
     
     juce::Label compLabel { {}, "COMP" };
     juce::Label gateLabel { {}, "GATE" };

@@ -202,16 +202,121 @@ float BiquadFilter::getMagnitudeAtFrequency(float frequency) const {
 
 float BiquadFilter::getPhaseAtFrequency(float frequency) const {
     const double w = 2.0 * pi * static_cast<double>(frequency) / sampleRate;
-    
+
     const std::complex<double> z1_c = std::exp(std::complex<double>(0.0, -w));
     const std::complex<double> z2_c = std::exp(std::complex<double>(0.0, -2.0 * w));
-    
+
     const std::complex<double> num = b0 + b1 * z1_c + b2 * z2_c;
     const std::complex<double> den = 1.0 + a1 * z1_c + a2 * z2_c;
-    
+
     const std::complex<double> H = num / den;
-    
+
     return static_cast<float>(std::arg(H));
+}
+
+float BiquadFilter::calcMagnitudeFromParams(FilterType type, float frequency, float q,
+                                             float gainDb, double sampleRate, float evalFrequency) {
+    // Calculate coefficients from parameters (same as updateCoefficients)
+    const double freq = std::clamp(static_cast<double>(frequency), 10.0, sampleRate * 0.499);
+    const double Q = std::max(0.01, static_cast<double>(q));
+    const double w0 = 2.0 * pi * freq / sampleRate;
+    const double cosw0 = std::cos(w0);
+    const double sinw0 = std::sin(w0);
+    const double alpha = sinw0 / (2.0 * Q);
+    const double A = std::pow(10.0, static_cast<double>(gainDb) / 40.0);
+
+    double b0_l = 1.0, b1_l = 0.0, b2_l = 0.0;
+    double a0_l = 1.0, a1_l = 0.0, a2_l = 0.0;
+
+    switch (type) {
+        case FilterType::LowPass:
+            b0_l = (1.0 - cosw0) / 2.0;
+            b1_l = 1.0 - cosw0;
+            b2_l = (1.0 - cosw0) / 2.0;
+            a0_l = 1.0 + alpha;
+            a1_l = -2.0 * cosw0;
+            a2_l = 1.0 - alpha;
+            break;
+        case FilterType::HighPass:
+            b0_l = (1.0 + cosw0) / 2.0;
+            b1_l = -(1.0 + cosw0);
+            b2_l = (1.0 + cosw0) / 2.0;
+            a0_l = 1.0 + alpha;
+            a1_l = -2.0 * cosw0;
+            a2_l = 1.0 - alpha;
+            break;
+        case FilterType::BandPass:
+            b0_l = alpha;
+            b1_l = 0.0;
+            b2_l = -alpha;
+            a0_l = 1.0 + alpha;
+            a1_l = -2.0 * cosw0;
+            a2_l = 1.0 - alpha;
+            break;
+        case FilterType::Notch:
+            b0_l = 1.0;
+            b1_l = -2.0 * cosw0;
+            b2_l = 1.0;
+            a0_l = 1.0 + alpha;
+            a1_l = -2.0 * cosw0;
+            a2_l = 1.0 - alpha;
+            break;
+        case FilterType::Peak:
+            b0_l = 1.0 + alpha * A;
+            b1_l = -2.0 * cosw0;
+            b2_l = 1.0 - alpha * A;
+            a0_l = 1.0 + alpha / A;
+            a1_l = -2.0 * cosw0;
+            a2_l = 1.0 - alpha / A;
+            break;
+        case FilterType::LowShelf: {
+            const double sqrtA = std::sqrt(A);
+            const double sqrtA_alpha = 2.0 * sqrtA * alpha;
+            b0_l = A * ((A + 1.0) - (A - 1.0) * cosw0 + sqrtA_alpha);
+            b1_l = 2.0 * A * ((A - 1.0) - (A + 1.0) * cosw0);
+            b2_l = A * ((A + 1.0) - (A - 1.0) * cosw0 - sqrtA_alpha);
+            a0_l = (A + 1.0) + (A - 1.0) * cosw0 + sqrtA_alpha;
+            a1_l = -2.0 * ((A - 1.0) + (A + 1.0) * cosw0);
+            a2_l = (A + 1.0) + (A - 1.0) * cosw0 - sqrtA_alpha;
+            break;
+        }
+        case FilterType::HighShelf: {
+            const double sqrtA = std::sqrt(A);
+            const double sqrtA_alpha = 2.0 * sqrtA * alpha;
+            b0_l = A * ((A + 1.0) + (A - 1.0) * cosw0 + sqrtA_alpha);
+            b1_l = -2.0 * A * ((A - 1.0) + (A + 1.0) * cosw0);
+            b2_l = A * ((A + 1.0) + (A - 1.0) * cosw0 - sqrtA_alpha);
+            a0_l = (A + 1.0) - (A - 1.0) * cosw0 + sqrtA_alpha;
+            a1_l = 2.0 * ((A - 1.0) - (A + 1.0) * cosw0);
+            a2_l = (A + 1.0) - (A - 1.0) * cosw0 - sqrtA_alpha;
+            break;
+        }
+        case FilterType::AllPass:
+            b0_l = 1.0 - alpha;
+            b1_l = -2.0 * cosw0;
+            b2_l = 1.0 + alpha;
+            a0_l = 1.0 + alpha;
+            a1_l = -2.0 * cosw0;
+            a2_l = 1.0 - alpha;
+            break;
+    }
+
+    // Normalize
+    b0_l /= a0_l;
+    b1_l /= a0_l;
+    b2_l /= a0_l;
+    a1_l /= a0_l;
+    a2_l /= a0_l;
+
+    // Calculate magnitude at evalFrequency
+    const double w = 2.0 * pi * static_cast<double>(evalFrequency) / sampleRate;
+    const std::complex<double> z1_c = std::exp(std::complex<double>(0.0, -w));
+    const std::complex<double> z2_c = std::exp(std::complex<double>(0.0, -2.0 * w));
+    const std::complex<double> num = b0_l + b1_l * z1_c + b2_l * z2_c;
+    const std::complex<double> den = 1.0 + a1_l * z1_c + a2_l * z2_c;
+    const std::complex<double> H = num / den;
+
+    return static_cast<float>(std::abs(H));
 }
 
 } // namespace SeshEQ

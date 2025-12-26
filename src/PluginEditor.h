@@ -10,14 +10,15 @@
 namespace SeshEQ {
 
 /**
- * @brief Main editor/UI for SeshEQ plugin
+ * @brief Main editor/UI for SeshNx Quanta plugin
  * 
- * Modern UI with:
- * - Spectrum analyzer with EQ curve overlay
- * - Draggable EQ band nodes
- * - Dynamics controls
- * - Level and gain reduction meters
- * - Resizable window
+ * Sci-Fi themed UI with:
+ * - Real-Time Spectrum Analyzer (central focus)
+ * - Interactive EQ Curve overlay (central focus)
+ * - 8-band Multiband Dynamic EQ with per-band controls
+ * - Per-band Gain Reduction meters
+ * - True Peak Limiter with dedicated meter
+ * - Fully resizable window
  */
 class PluginEditor : public juce::AudioProcessorEditor,
                       private juce::Timer {
@@ -27,12 +28,17 @@ public:
 
     //==============================================================================
     void paint(juce::Graphics&) override;
+    void paintOverChildren(juce::Graphics&) override;
     void resized() override;
 
 private:
     void timerCallback() override;
     void setupSlider(juce::Slider& slider, juce::Slider::SliderStyle style = juce::Slider::RotaryHorizontalVerticalDrag);
     void setupLabel(juce::Label& label, const juce::String& text);
+    void loadLogo();
+    void refreshPresetList();
+    void saveCurrentPreset();
+    void updateLatencyDisplay();
     
     // Reference to processor
     PluginProcessor& processorRef;
@@ -51,8 +57,12 @@ private:
         BandControlPanel(int bandIndex);
         void resized() override;
         void paint(juce::Graphics& g) override;
-        
+        void setGainReduction(float dB) { gainReductionDb = dB; repaint(); }
+
         int band;
+        float gainReductionDb = 0.0f;
+
+        // EQ controls
         juce::Slider freqSlider;
         juce::Slider gainSlider;
         juce::Slider qSlider;
@@ -61,6 +71,13 @@ private:
         juce::Label freqLabel { {}, "Freq" };
         juce::Label gainLabel { {}, "Gain" };
         juce::Label qLabel { {}, "Q" };
+
+        // Per-band dynamics controls
+        juce::Slider dynThreshSlider;
+        juce::Slider dynRatioSlider;
+        juce::ToggleButton dynEnableButton { "DYN" };
+        juce::Label dynThreshLabel { {}, "Thr" };
+        juce::Label dynRatioLabel { {}, "Rat" };
     };
     
     std::array<std::unique_ptr<BandControlPanel>, Constants::numEQBands> bandPanels;
@@ -87,20 +104,41 @@ private:
     juce::Label gateReleaseLabel { {}, "Release" }, gateRangeLabel { {}, "Range" };
     
     // Limiter panel
-    juce::GroupComponent limiterGroup { {}, "LIMITER" };
-    juce::Slider limiterCeilingSlider, limiterReleaseSlider;
+    juce::GroupComponent limiterGroup { {}, "TRUE PEAK LIMITER" };
+    juce::Slider limiterThresholdSlider, limiterCeilingSlider, limiterReleaseSlider;
     juce::ToggleButton limiterEnableButton { "ON" };
-    juce::Label limCeilingLabel { {}, "Ceiling" }, limReleaseLabel { {}, "Release" };
+    juce::Label limThreshLabel { {}, "Thresh" }, limCeilingLabel { {}, "Ceiling" }, limReleaseLabel { {}, "Release" };
     
     //==============================================================================
     // Global controls
     juce::Slider inputGainSlider, outputGainSlider, dryWetSlider;
     juce::ToggleButton bypassButton { "BYPASS" };
     juce::Label inputLabel { {}, "IN" }, outputLabel { {}, "OUT" }, mixLabel { {}, "MIX" };
+
+    // Advanced mode toggles
+    juce::ToggleButton linearPhaseButton { "LINEAR PHASE" };
+    juce::ToggleButton midSideButton { "MID/SIDE" };
+    juce::ToggleButton dynamicEQButton { "DYNAMIC EQ" };
+
+    // Oversampling control
+    juce::ComboBox oversamplingCombo;
+    juce::Label oversamplingLabel { {}, "OVERSAMPLE" };
+
+    // Preset controls
+    juce::ComboBox presetCombo;
+    juce::TextButton savePresetButton { "Save" };
+    juce::Label presetLabel { {}, "PRESET" };
+    juce::Label latencyLabel { {}, "0 samples" };
     
     //==============================================================================
     // Metering
     DynamicsMeterPanel meterPanel;
+    
+    //==============================================================================
+    // Company branding
+    juce::ImageComponent logoComponent;
+    juce::TextButton websiteLink;
+    juce::Image logoImage;
     
     //==============================================================================
     // Parameter attachments
@@ -111,12 +149,17 @@ private:
     // Global
     std::unique_ptr<SliderAttachment> inputGainAttach, outputGainAttach, dryWetAttach;
     std::unique_ptr<ButtonAttachment> bypassAttach;
+    std::unique_ptr<ButtonAttachment> linearPhaseAttach, midSideAttach, dynamicEQAttach;
+    std::unique_ptr<ComboAttachment> oversamplingAttach;
     
     // EQ bands
     struct BandAttachments {
         std::unique_ptr<SliderAttachment> freq, gain, q;
         std::unique_ptr<ComboAttachment> type;
         std::unique_ptr<ButtonAttachment> enable;
+        // Per-band dynamics
+        std::unique_ptr<SliderAttachment> dynThresh, dynRatio;
+        std::unique_ptr<ButtonAttachment> dynEnable;
     };
     std::array<BandAttachments, Constants::numEQBands> bandAttachments;
     
@@ -133,15 +176,15 @@ private:
     std::unique_ptr<ButtonAttachment> gateEnableAttach;
     
     // Limiter
-    std::unique_ptr<SliderAttachment> limiterCeilingAttach, limiterReleaseAttach;
+    std::unique_ptr<SliderAttachment> limiterThresholdAttach, limiterCeilingAttach, limiterReleaseAttach;
     std::unique_ptr<ButtonAttachment> limiterEnableAttach;
     
     //==============================================================================
     // Sizing
-    static constexpr int defaultWidth = 1100;
-    static constexpr int defaultHeight = 700;
-    static constexpr int minWidth = 800;
-    static constexpr int minHeight = 500;
+    static constexpr int defaultWidth = 1400;
+    static constexpr int defaultHeight = 900;
+    static constexpr int minWidth = 1000;
+    static constexpr int minHeight = 650;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginEditor)
 };

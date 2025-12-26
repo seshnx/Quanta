@@ -1,6 +1,7 @@
 #pragma once
 
 #include <juce_audio_processors/juce_audio_processors.h>
+#include <juce_dsp/juce_dsp.h>
 #include "dsp/EQProcessor.h"
 #include "dsp/Compressor.h"
 #include "dsp/Gate.h"
@@ -8,16 +9,18 @@
 #include "utils/Parameters.h"
 #include "utils/SmoothValue.h"
 #include "utils/FFTProcessor.h"
+#include "utils/PresetManager.h"
 
 namespace SeshEQ {
 
 /**
- * @brief Main audio processor for SeshEQ plugin
+ * @brief Main audio processor for SeshNx Quanta plugin
  * 
  * Signal flow:
- * Input -> Input Gain -> EQ -> Compressor -> Gate -> Limiter -> Output Gain -> Dry/Wet -> Output
+ * Input -> Input Gain -> Multiband Dynamic EQ (8 bands with per-band dynamics) -> True Peak Limiter -> Output Gain -> Dry/Wet -> Output
  */
-class PluginProcessor : public juce::AudioProcessor {
+class PluginProcessor : public juce::AudioProcessor,
+                        public juce::AudioProcessorValueTreeState::Listener {
 public:
     PluginProcessor();
     ~PluginProcessor() override;
@@ -54,6 +57,10 @@ public:
     //==============================================================================
     void getStateInformation(juce::MemoryBlock& destData) override;
     void setStateInformation(const void* data, int sizeInBytes) override;
+    
+    //==============================================================================
+    // ParameterListener for advanced features
+    void parameterChanged(const juce::String& parameterID, float newValue) override;
 
     //==============================================================================
     // Public accessors for editor
@@ -67,6 +74,8 @@ public:
     float getCompressorGainReduction() const { return compressor.getGainReduction(); }
     float getGateGainReduction() const { return gate.getGainReduction(); }
     float getLimiterGainReduction() const { return limiter.getGainReduction(); }
+    float getBandGainReduction(int bandIndex) const { return eqProcessor.getBandGainReduction(bandIndex); }
+    float getTruePeak() const { return limiter.getTruePeak(); }
     
     // Get input/output levels for metering
     float getInputLevel() const { return inputLevelDb.load(); }
@@ -76,10 +85,19 @@ public:
     FFTProcessor& getPreFFT() { return fftProcessor.getPreFFT(); }
     FFTProcessor& getPostFFT() { return fftProcessor.getPostFFT(); }
 
+    // Preset manager access
+    PresetManager& getPresetManager() { return presetManager; }
+
+    // Get latency in samples
+    int getLatencySamples() const;
+
 private:
     // Parameter tree state
     juce::AudioProcessorValueTreeState apvts;
-    
+
+    // Preset manager
+    PresetManager presetManager { apvts };
+
     // DSP processors
     EQProcessor eqProcessor;
     Compressor compressor;
@@ -109,7 +127,17 @@ private:
     
     // Sample rate
     double currentSampleRate = 44100.0;
-    
+    int currentBlockSize = 512;
+
+    // Global oversampling
+    std::unique_ptr<juce::dsp::Oversampling<float>> oversampling;
+    std::atomic<float>* oversamplingParam = nullptr;
+    int currentOversamplingFactor = 1;  // 1, 2, 4, or 8
+
+    // Helper to update oversampling factor
+    void updateOversamplingFactor();
+    int getOversamplingLatency() const;
+
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(PluginProcessor)
 };
 

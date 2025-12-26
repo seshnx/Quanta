@@ -12,7 +12,7 @@ void Compressor::prepare(double newSampleRate, int /*samplesPerBlock*/) {
 
 void Compressor::reset() {
     levelDetector.reset();
-    gainReductionDb = 0.0f;
+    gainReductionDb.store(0.0f);
 }
 
 void Compressor::setThreshold(float dB) {
@@ -20,7 +20,10 @@ void Compressor::setThreshold(float dB) {
 }
 
 void Compressor::setRatio(float newRatio) {
-    ratio = std::max(1.0f, newRatio);
+    // Allow ratios from 0.1 (expansion) to 20.0 (limiting)
+    // Ratio < 1.0 = Expander mode (boost below threshold)
+    // Ratio > 1.0 = Compressor mode (reduce above threshold)
+    ratio = std::clamp(newRatio, 0.1f, 20.0f);
 }
 
 void Compressor::setAttack(float ms) {
@@ -53,37 +56,62 @@ void Compressor::setEnabled(bool newEnabled) {
 }
 
 float Compressor::computeGain(float inputDb) const {
-    // Soft knee compression curve
+    // Soft knee dynamics curve
+    // Supports both compression (ratio > 1) and expansion (ratio < 1)
     // Based on: https://www.musicdsp.org/en/latest/Effects/169-compressor.html
-    
+
     const float halfKnee = kneeDb / 2.0f;
     const float kneeStart = thresholdDb - halfKnee;
     const float kneeEnd = thresholdDb + halfKnee;
-    
+
     float outputDb;
-    
-    if (inputDb < kneeStart) {
-        // Below knee - no compression
-        outputDb = inputDb;
-    } else if (inputDb > kneeEnd) {
-        // Above knee - full compression
-        outputDb = thresholdDb + (inputDb - thresholdDb) / ratio;
+
+    if (ratio >= 1.0f) {
+        // COMPRESSION MODE (ratio >= 1.0)
+        // Reduce gain for signals above threshold
+        if (inputDb < kneeStart) {
+            // Below knee - no compression
+            outputDb = inputDb;
+        } else if (inputDb > kneeEnd) {
+            // Above knee - full compression
+            outputDb = thresholdDb + (inputDb - thresholdDb) / ratio;
+        } else {
+            // In knee region - smooth transition
+            const float kneeInput = inputDb - kneeStart;
+            const float kneeRange = kneeDb;
+            const float compressionRatio = 1.0f + (ratio - 1.0f) * (kneeInput / kneeRange);
+            outputDb = kneeStart + kneeInput / compressionRatio;
+        }
     } else {
-        // In knee region - smooth transition
-        // Quadratic interpolation in the knee region
-        const float kneeInput = inputDb - kneeStart;
-        const float kneeRange = kneeDb;
-        const float compressionRatio = 1.0f + (ratio - 1.0f) * (kneeInput / kneeRange);
-        outputDb = kneeStart + kneeInput / compressionRatio;
+        // EXPANSION MODE (ratio < 1.0)
+        // Reduce gain for signals BELOW threshold (downward expansion)
+        // This creates a gate-like effect with smooth transition
+        if (inputDb > kneeEnd) {
+            // Above knee - no expansion (pass through)
+            outputDb = inputDb;
+        } else if (inputDb < kneeStart) {
+            // Below knee - full expansion
+            // For expansion, we attenuate signals below threshold
+            // The expansion ratio inverts: ratio 0.5 means 2:1 expansion
+            const float expansionRatio = 1.0f / ratio;
+            outputDb = thresholdDb - (thresholdDb - inputDb) * expansionRatio;
+        } else {
+            // In knee region - smooth transition
+            const float kneeInput = kneeEnd - inputDb;
+            const float kneeRange = kneeDb;
+            const float t = kneeInput / kneeRange; // 0 at kneeEnd, 1 at kneeStart
+            const float expansionRatio = 1.0f + (1.0f / ratio - 1.0f) * t;
+            outputDb = inputDb - (thresholdDb - inputDb) * (expansionRatio - 1.0f) * t;
+        }
     }
-    
-    // Return gain reduction (negative value)
+
+    // Return gain change (negative for reduction, positive for boost)
     return outputDb - inputDb;
 }
 
 void Compressor::process(juce::AudioBuffer<float>& buffer) {
     if (!enabled) {
-        gainReductionDb = 0.0f;
+        gainReductionDb.store(0.0f);
         return;
     }
     
@@ -127,7 +155,7 @@ void Compressor::process(juce::AudioBuffer<float>& buffer) {
         }
     }
     
-    gainReductionDb = maxGainReduction;
+    gainReductionDb.store(maxGainReduction);
 }
 
 void Compressor::connectToParameters(juce::AudioProcessorValueTreeState& apvts) {

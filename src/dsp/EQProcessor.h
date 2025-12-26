@@ -1,10 +1,16 @@
 #pragma once
 
 #include "BiquadFilter.h"
+#include "LinearPhaseEQ.h"
+#include "DynamicEQ.h"
+#include "BandDynamics.h"
+#include "utils/MidSideProcessor.h"
 #include "utils/Parameters.h"
 #include "utils/SmoothValue.h"
 #include <array>
+#include <memory>
 #include <juce_audio_processors/juce_audio_processors.h>
+#include <juce_core/juce_core.h>
 
 namespace SeshEQ {
 
@@ -32,6 +38,23 @@ public:
      * @brief Process a stereo audio buffer
      */
     void process(juce::AudioBuffer<float>& buffer);
+    
+    /**
+     * @brief Set Mid/Side processing mode
+     * @param enabled If true, process Mid and Side channels separately
+     */
+    void setMidSideMode(bool enabled);
+    
+    /**
+     * @brief Set Linear Phase mode
+     * @param enabled If true, use linear phase EQ (higher latency, zero phase distortion)
+     */
+    void setLinearPhaseMode(bool enabled);
+    
+    /**
+     * @brief Get latency in samples (for linear phase mode)
+     */
+    int getLatency() const;
     
     /**
      * @brief Update parameters for a specific band
@@ -78,6 +101,23 @@ public:
      */
     void updateFromParameters();
     
+    /**
+     * @brief Set Dynamic EQ mode
+     * @param enabled If true, enable dynamic EQ processing
+     */
+    void setDynamicEQMode(bool enabled);
+    
+    /**
+     * @brief Get gain reduction for a specific band (for metering)
+     */
+    float getBandGainReduction(int bandIndex) const;
+    
+private:
+    /**
+     * @brief Standard EQ processing (used by both normal and M/S modes)
+     */
+    void processStandard(juce::AudioBuffer<float>& buffer);
+    
 private:
     static constexpr int numBands = Constants::numEQBands;
     
@@ -107,6 +147,27 @@ private:
     
     double currentSampleRate = 44100.0;
     bool prepared = false;
+    
+    // Thread safety for UI access
+    mutable juce::CriticalSection lock;
+    
+    // Advanced features
+    bool midSideMode = false;
+    bool linearPhaseMode = false;
+    bool dynamicEQMode = false;
+    
+    // Mid/Side buffers
+    juce::AudioBuffer<float> midBuffer;
+    juce::AudioBuffer<float> sideBuffer;
+    
+    // Linear Phase EQ (for zero phase distortion)
+    std::unique_ptr<LinearPhaseEQ> linearPhaseEQ;
+    
+    // Dynamic EQ (for sidechain-responsive bands)
+    std::unique_ptr<DynamicEQProcessor> dynamicEQ;
+    
+    // Per-band dynamics processors
+    std::array<BandDynamics, numBands> bandDynamics;
 };
 
 } // namespace SeshEQ
