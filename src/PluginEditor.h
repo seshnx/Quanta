@@ -58,9 +58,12 @@ private:
         void resized() override;
         void paint(juce::Graphics& g) override;
         void setGainReduction(float dB) { gainReductionDb = dB; repaint(); }
+        void setHighlighted(bool shouldHighlight) { highlighted = shouldHighlight; repaint(); }
+        bool isHighlighted() const { return highlighted; }
 
         int band;
         float gainReductionDb = 0.0f;
+        bool highlighted = false;
 
         // EQ controls
         juce::Slider freqSlider;

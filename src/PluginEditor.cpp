@@ -10,13 +10,13 @@ namespace SeshEQ {
 PluginEditor::BandControlPanel::BandControlPanel(int bandIndex) : band(bandIndex) {
     // EQ controls - larger text boxes for readability
     freqSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-    freqSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 60, 16);
+    freqSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 70, 16);
 
     gainSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-    gainSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 60, 16);
+    gainSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 70, 16);
 
     qSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-    qSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 60, 16);
+    qSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 70, 16);
 
     typeCombo.addItemList(getFilterTypeNames(), 1);
 
@@ -38,10 +38,10 @@ PluginEditor::BandControlPanel::BandControlPanel(int bandIndex) : band(bandIndex
 
     // Per-band dynamics controls - larger for readability
     dynThreshSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-    dynThreshSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 14);
+    dynThreshSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 55, 14);
 
     dynRatioSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
-    dynRatioSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 50, 14);
+    dynRatioSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 55, 14);
 
     addAndMakeVisible(dynThreshSlider);
     addAndMakeVisible(dynRatioSlider);
@@ -60,11 +60,42 @@ void PluginEditor::BandControlPanel::paint(juce::Graphics& g) {
 
     // Background with band color
     auto color = SeshLookAndFeel::Colors::bandColors[static_cast<size_t>(band)];
-    g.setColour(color.withAlpha(0.1f));
-    g.fillRoundedRectangle(bounds, 4.0f);
 
-    g.setColour(color.withAlpha(0.3f));
-    g.drawRoundedRectangle(bounds.reduced(0.5f), 4.0f, 1.0f);
+    // Highlighted glow effect when band is selected in EQ curve
+    if (highlighted) {
+        // Outer glow
+        for (int i = 3; i >= 0; --i) {
+            float alpha = 0.15f - (i * 0.03f);
+            g.setColour(color.withAlpha(alpha));
+            g.fillRoundedRectangle(bounds.expanded(static_cast<float>(i * 2)), 6.0f);
+        }
+        // Brighter inner fill when highlighted
+        g.setColour(color.withAlpha(0.25f));
+        g.fillRoundedRectangle(bounds, 4.0f);
+        // Bright border
+        g.setColour(color.withAlpha(0.8f));
+        g.drawRoundedRectangle(bounds.reduced(0.5f), 4.0f, 2.0f);
+    } else {
+        g.setColour(color.withAlpha(0.1f));
+        g.fillRoundedRectangle(bounds, 4.0f);
+        g.setColour(color.withAlpha(0.3f));
+        g.drawRoundedRectangle(bounds.reduced(0.5f), 4.0f, 1.0f);
+    }
+
+    // Band number indicator badge at top-right corner
+    const float badgeSize = 22.0f;
+    auto badgeBounds = juce::Rectangle<float>(bounds.getRight() - badgeSize - 4.0f,
+                                               bounds.getY() + 4.0f,
+                                               badgeSize, badgeSize);
+
+    // Badge background
+    g.setColour(highlighted ? color : color.withAlpha(0.6f));
+    g.fillEllipse(badgeBounds);
+
+    // Badge number
+    g.setColour(juce::Colours::white);
+    g.setFont(juce::Font(13.0f).boldened());
+    g.drawText(juce::String(band + 1), badgeBounds.toNearestInt(), juce::Justification::centred);
 
     // Draw GR meter at the bottom of the panel
     const float meterHeight = 8.0f;
@@ -105,57 +136,62 @@ void PluginEditor::BandControlPanel::paint(juce::Graphics& g) {
 }
 
 void PluginEditor::BandControlPanel::resized() {
-    auto bounds = getLocalBounds().reduced(6);
+    auto bounds = getLocalBounds().reduced(4);
 
     // Reserve space for GR meter at bottom
-    bounds.removeFromBottom(16);
+    bounds.removeFromBottom(14);
 
     // Enable button and type selector at top
-    auto topRow = bounds.removeFromTop(28);
-    enableButton.setBounds(topRow.removeFromLeft(28));
-    topRow.removeFromLeft(6);
+    auto topRow = bounds.removeFromTop(26);
+    enableButton.setBounds(topRow.removeFromLeft(26));
+    topRow.removeFromLeft(4);
     typeCombo.setBounds(topRow);
 
-    bounds.removeFromTop(6);
+    bounds.removeFromTop(4);
 
     // Split into left (EQ) and right (Dynamics) sections
-    const int dynWidth = 65;
+    const int dynWidth = 55;
     auto dynBounds = bounds.removeFromRight(dynWidth);
-    bounds.removeFromRight(4);
+    bounds.removeFromRight(2);
 
-    // EQ controls - Three rotary sliders with proper spacing
-    const int knobHeight = (bounds.getHeight() - 42) / 3;
+    // EQ controls - Three rotary sliders with LARGER sizing
+    const int labelHeight = 12;
+    const int knobHeight = (bounds.getHeight() - labelHeight * 3 - 6) / 3;
+    const int minKnobSize = 70;  // Minimum knob size for visibility
 
-    auto freqArea = bounds.removeFromTop(knobHeight);
-    freqLabel.setBounds(freqArea.removeFromTop(14));
-    freqSlider.setBounds(freqArea);
+    auto freqArea = bounds.removeFromTop(knobHeight + labelHeight);
+    freqLabel.setBounds(freqArea.removeFromTop(labelHeight));
+    auto freqKnobArea = freqArea.withSizeKeepingCentre(std::max(freqArea.getWidth(), minKnobSize), freqArea.getHeight());
+    freqSlider.setBounds(freqKnobArea);
 
-    bounds.removeFromTop(4);
+    bounds.removeFromTop(2);
 
-    auto gainArea = bounds.removeFromTop(knobHeight);
-    gainLabel.setBounds(gainArea.removeFromTop(14));
-    gainSlider.setBounds(gainArea);
+    auto gainArea = bounds.removeFromTop(knobHeight + labelHeight);
+    gainLabel.setBounds(gainArea.removeFromTop(labelHeight));
+    auto gainKnobArea = gainArea.withSizeKeepingCentre(std::max(gainArea.getWidth(), minKnobSize), gainArea.getHeight());
+    gainSlider.setBounds(gainKnobArea);
 
-    bounds.removeFromTop(4);
+    bounds.removeFromTop(2);
 
     auto qArea = bounds;
-    qLabel.setBounds(qArea.removeFromTop(14));
-    qSlider.setBounds(qArea);
+    qLabel.setBounds(qArea.removeFromTop(labelHeight));
+    auto qKnobArea = qArea.withSizeKeepingCentre(std::max(qArea.getWidth(), minKnobSize), qArea.getHeight());
+    qSlider.setBounds(qKnobArea);
 
-    // Dynamics controls - right column
-    dynEnableButton.setBounds(dynBounds.removeFromTop(24));
-    dynBounds.removeFromTop(4);
+    // Dynamics controls - right column (smaller)
+    dynEnableButton.setBounds(dynBounds.removeFromTop(22));
+    dynBounds.removeFromTop(2);
 
-    const int dynKnobHeight = (dynBounds.getHeight() - 24) / 2;
+    const int dynKnobHeight = (dynBounds.getHeight() - 20) / 2;
 
     auto dynThreshArea = dynBounds.removeFromTop(dynKnobHeight);
-    dynThreshLabel.setBounds(dynThreshArea.removeFromTop(12));
+    dynThreshLabel.setBounds(dynThreshArea.removeFromTop(10));
     dynThreshSlider.setBounds(dynThreshArea);
 
-    dynBounds.removeFromTop(4);
+    dynBounds.removeFromTop(2);
 
     auto dynRatioArea = dynBounds;
-    dynRatioLabel.setBounds(dynRatioArea.removeFromTop(12));
+    dynRatioLabel.setBounds(dynRatioArea.removeFromTop(10));
     dynRatioSlider.setBounds(dynRatioArea);
 }
 
@@ -180,6 +216,13 @@ PluginEditor::PluginEditor(PluginProcessor& p)
     spectrumAnalyzer.setShowPreSpectrum(false);
     eqCurveDisplay.setEQProcessor(&processorRef.getEQProcessor());
     eqCurveDisplay.connectToParameters(apvts);
+
+    // Connect band selection callback to highlight corresponding band panel
+    eqCurveDisplay.setOnBandSelected([this](int selectedBand) {
+        for (int i = 0; i < Constants::numEQBands; ++i) {
+            bandPanels[static_cast<size_t>(i)]->setHighlighted(i == selectedBand);
+        }
+    });
     
     //==========================================================================
     // EQ band panels
@@ -345,6 +388,13 @@ PluginEditor::PluginEditor(PluginProcessor& p)
     addAndMakeVisible(midSideButton);
     addAndMakeVisible(dynamicEQButton);
 
+    // Add tooltips explaining each mode
+    linearPhaseButton.setTooltip("Linear Phase Mode: Eliminates phase distortion for transparent mastering. Adds latency.");
+    midSideButton.setTooltip("Mid/Side Mode: Process center (Mid) and sides (Side) independently for stereo enhancement.");
+    dynamicEQButton.setTooltip("Dynamic EQ: Each band responds to signal level. Enable per-band dynamics (DYN button) "
+                               "to compress or expand specific frequencies. Great for de-essing, taming resonances, "
+                               "or adding punch without static EQ artifacts.");
+
     linearPhaseAttach = std::make_unique<ButtonAttachment>(apvts, ParamIDs::linearPhaseMode, linearPhaseButton);
     midSideAttach = std::make_unique<ButtonAttachment>(apvts, ParamIDs::midSideMode, midSideButton);
     dynamicEQAttach = std::make_unique<ButtonAttachment>(apvts, ParamIDs::dynamicEQMode, dynamicEQButton);
@@ -432,7 +482,7 @@ PluginEditor::~PluginEditor() {
 
 void PluginEditor::setupSlider(juce::Slider& slider, juce::Slider::SliderStyle style) {
     slider.setSliderStyle(style);
-    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 55, 14);
+    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 65, 14);
 }
 
 void PluginEditor::setupLabel(juce::Label& label, const juce::String& text) {
@@ -442,40 +492,41 @@ void PluginEditor::setupLabel(juce::Label& label, const juce::String& text) {
 }
 
 void PluginEditor::loadLogo() {
-    // Try to load logo from file (relative to plugin location or executable directory)
-    // Look for the new SeshNx logo
+    // Try to load logo from various locations
     juce::File logoFile;
-    
-    // Try common logo filenames
-    const std::array<juce::String, 4> logoNames = {
-        "SeshNx_Logo.png",
-        "SeshNx-Logo.png",
-        "logo.png",
-        "SeshNx.png"
-    };
-    
-    // First try in executable directory (for deployed plugin)
+
+    const juce::String logoName = "company_logo.png";
+
+    // List of directories to search
+    std::vector<juce::File> searchDirs;
+
+    // 1. Executable directory (standalone)
     auto exeDir = juce::File::getSpecialLocation(juce::File::currentExecutableFile).getParentDirectory();
-    for (const auto& name : logoNames) {
-        logoFile = exeDir.getChildFile(name);
+    searchDirs.push_back(exeDir);
+    searchDirs.push_back(exeDir.getChildFile("resources"));
+
+    // 2. VST3 bundle resources (macOS structure)
+    searchDirs.push_back(exeDir.getParentDirectory().getChildFile("Resources"));
+
+    // 3. Project root and resources folder (development)
+    auto sourceDir = juce::File(__FILE__).getParentDirectory().getParentDirectory();
+    searchDirs.push_back(sourceDir);
+    searchDirs.push_back(sourceDir.getChildFile("resources"));
+
+    // 4. One level up from source (project root)
+    auto projectRoot = sourceDir.getParentDirectory();
+    searchDirs.push_back(projectRoot);
+    searchDirs.push_back(projectRoot.getChildFile("resources"));
+
+    // Search all directories
+    for (const auto& dir : searchDirs) {
+        logoFile = dir.getChildFile(logoName);
         if (logoFile.existsAsFile()) {
-            break;
-        }
-    }
-    
-    // If not found, try relative to source directory (for development)
-    if (!logoFile.existsAsFile()) {
-        auto sourceDir = juce::File(__FILE__).getParentDirectory().getParentDirectory().getParentDirectory();
-        for (const auto& name : logoNames) {
-            logoFile = sourceDir.getChildFile(name);
-            if (logoFile.existsAsFile()) {
-                break;
+            logoImage = juce::ImageFileFormat::loadFrom(logoFile);
+            if (logoImage.isValid()) {
+                return;
             }
         }
-    }
-    
-    if (logoFile.existsAsFile()) {
-        logoImage = juce::ImageFileFormat::loadFrom(logoFile);
     }
 }
 
@@ -550,50 +601,47 @@ void PluginEditor::paintOverChildren(juce::Graphics& g) {
 
 void PluginEditor::resized() {
     auto bounds = getLocalBounds();
-    const int padding = 12;
+    const int padding = 10;
     const int headerHeight = 55;
     const int meterPanelHeight = 90;
-    const int eqBandHeight = 240;  // Increased for larger knobs
-    const int dynamicsHeight = 170;
+    const int eqBandHeight = 280;  // Larger for bigger knobs
+    const int dynamicsHeight = 200; // Larger for bigger knobs
 
     // Header area (not reduced by padding)
     auto headerArea = bounds.removeFromTop(headerHeight);
     headerArea.reduce(padding, 8);
 
     // Preset controls on the RIGHT side of header (like Aetheri)
-    auto presetArea = headerArea.removeFromRight(280);
+    auto presetArea = headerArea.removeFromRight(300);
     presetArea.reduce(5, 4);
     auto presetRow = presetArea.removeFromTop(24);
-    presetCombo.setBounds(presetRow.removeFromLeft(140).reduced(2, 0));
+    presetCombo.setBounds(presetRow.removeFromLeft(150).reduced(2, 0));
     presetRow.removeFromLeft(4);
-    savePresetButton.setBounds(presetRow.removeFromLeft(50).reduced(2, 0));
+    savePresetButton.setBounds(presetRow.removeFromLeft(55).reduced(2, 0));
     presetRow.removeFromLeft(4);
-    bypassButton.setBounds(presetRow.removeFromLeft(65).reduced(2, 0));
-    latencyLabel.setBounds(presetArea.removeFromTop(16).reduced(4, 0));
-    presetLabel.setVisible(false);  // Hide the preset label (redundant)
+    bypassButton.setBounds(presetRow.removeFromLeft(75).reduced(2, 0));
+    presetLabel.setVisible(false);
+    latencyLabel.setVisible(false);  // Hide latency indicator
+    websiteLink.setVisible(false);   // Hide website link
 
     // Logo is drawn centered via paintOverChildren - hide the logoComponent
     logoComponent.setVisible(false);
-
-    // Website link below header on right
-    websiteLink.setBounds(headerArea.removeFromRight(100).reduced(2, 4));
 
     // Title area on left is drawn via paint() - skip that space
     headerArea.removeFromLeft(180);
 
     // Advanced mode toggles in remaining header center
     auto modesArea = headerArea;
-    const int toggleWidth = 85;
     const int toggleHeight = 20;
 
     auto toggleRow = modesArea.removeFromTop(toggleHeight).reduced(0, 2);
-    linearPhaseButton.setBounds(toggleRow.removeFromLeft(toggleWidth).reduced(2, 0));
-    midSideButton.setBounds(toggleRow.removeFromLeft(toggleWidth).reduced(2, 0));
-    dynamicEQButton.setBounds(toggleRow.removeFromLeft(toggleWidth).reduced(2, 0));
+    linearPhaseButton.setBounds(toggleRow.removeFromLeft(115).reduced(2, 0));
+    midSideButton.setBounds(toggleRow.removeFromLeft(90).reduced(2, 0));
+    dynamicEQButton.setBounds(toggleRow.removeFromLeft(105).reduced(2, 0));
 
     // Oversampling dropdown on second row
     auto osRow = modesArea.removeFromTop(toggleHeight).reduced(0, 2);
-    oversamplingLabel.setBounds(osRow.removeFromLeft(70).reduced(2, 0));
+    oversamplingLabel.setBounds(osRow.removeFromLeft(90).reduced(2, 0));
     oversamplingCombo.setBounds(osRow.removeFromLeft(70).reduced(2, 0));
 
     // Main content area
@@ -631,27 +679,24 @@ void PluginEditor::resized() {
     auto meterArea = bottomArea.removeFromRight(200);
     meterPanel.setBounds(meterArea);
     
-    // Global controls next to meters
-    auto globalArea = bottomArea.removeFromRight(200).reduced(5, 0);
+    // Global controls next to meters (IN, OUT, MIX knobs)
+    auto globalArea = bottomArea.removeFromRight(165).reduced(5, 0);
 
-    const int globalKnobWidth = 55;
+    const int globalKnobWidth = 50;
 
-    // Input/Output/Mix knobs (bypass moved to header)
-    auto knobRow = globalArea;
-    
-    auto inputArea = knobRow.removeFromLeft(globalKnobWidth);
+    auto inputArea = globalArea.removeFromLeft(globalKnobWidth);
     inputLabel.setBounds(inputArea.removeFromTop(14));
     inputGainSlider.setBounds(inputArea);
-    
-    knobRow.removeFromLeft(5);
-    
-    auto outputArea = knobRow.removeFromLeft(globalKnobWidth);
+
+    globalArea.removeFromLeft(5);
+
+    auto outputArea = globalArea.removeFromLeft(globalKnobWidth);
     outputLabel.setBounds(outputArea.removeFromTop(14));
     outputGainSlider.setBounds(outputArea);
-    
-    knobRow.removeFromLeft(5);
-    
-    auto mixArea = knobRow.removeFromLeft(globalKnobWidth);
+
+    globalArea.removeFromLeft(5);
+
+    auto mixArea = globalArea.removeFromLeft(globalKnobWidth);
     mixLabel.setBounds(mixArea.removeFromTop(14));
     dryWetSlider.setBounds(mixArea);
     

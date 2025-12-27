@@ -399,13 +399,12 @@ DynamicsMeterPanel::DynamicsMeterPanel() {
     addAndMakeVisible(limiterMeter);
     addAndMakeVisible(inputMeter);
     addAndMakeVisible(outputMeter);
-    addAndMakeVisible(truePeakMeter);
-    
+    // truePeakMeter hidden - not needed
+
     // Set meter colors (sci-fi theme - cyan variations)
     compMeter.setColor(juce::Colour(0xff00ffff)); // Cyan
     gateMeter.setColor(juce::Colour(0xff88ffff)); // Light Cyan
     limiterMeter.setColor(juce::Colour(0xff00ccff)); // Cyan-Blue
-    truePeakMeter.setRange(-60.0f, 6.0f);
     
     // Ensure all level meters are vertical
     inputMeter.setRange(-60.0f, 6.0f);
@@ -446,53 +445,49 @@ void DynamicsMeterPanel::setTruePeak(float dB) {
 void DynamicsMeterPanel::paint(juce::Graphics& g) {
     // Use software rendering with high-quality settings
     g.setImageResamplingQuality(juce::Graphics::highResamplingQuality);
-    
+
     g.fillAll(juce::Colour(0xff000000)); // Black background
-    
+
     // Section dividers (cyan)
     g.setColour(juce::Colour(0xff00ffff).withAlpha(0.2f));
-    
+
     auto bounds = getLocalBounds();
-    const int sectionWidth = bounds.getWidth() / 6; // 6 sections now (added True Peak)
-    
-    for (int i = 1; i < 6; ++i) {
+    const int sectionWidth = bounds.getWidth() / 5; // 5 sections
+
+    for (int i = 1; i < 5; ++i) {
         g.drawVerticalLine(sectionWidth * i, 0.0f, static_cast<float>(bounds.getHeight()));
     }
 }
 
 void DynamicsMeterPanel::resized() {
     auto bounds = getLocalBounds().reduced(4);
-    const int sectionWidth = bounds.getWidth() / 6; // 6 sections now
+    const int sectionWidth = bounds.getWidth() / 5; // 5 sections
     const int labelHeight = 14;
-    
+
     // Input meter
     auto inputArea = bounds.removeFromLeft(sectionWidth).reduced(2);
     inputLabel.setBounds(inputArea.removeFromBottom(labelHeight));
     inputMeter.setBounds(inputArea);
-    
+
     // Compressor GR
     auto compArea = bounds.removeFromLeft(sectionWidth).reduced(2);
     compLabel.setBounds(compArea.removeFromBottom(labelHeight));
     compMeter.setBounds(compArea);
-    
+
     // Gate GR
     auto gateArea = bounds.removeFromLeft(sectionWidth).reduced(2);
     gateLabel.setBounds(gateArea.removeFromBottom(labelHeight));
     gateMeter.setBounds(gateArea);
-    
+
     // Limiter GR
     auto limArea = bounds.removeFromLeft(sectionWidth).reduced(2);
     limiterLabel.setBounds(limArea.removeFromBottom(labelHeight));
     limiterMeter.setBounds(limArea);
-    
+
     // Output meter
-    auto outputArea = bounds.removeFromLeft(sectionWidth).reduced(2);
+    auto outputArea = bounds.reduced(2);
     outputLabel.setBounds(outputArea.removeFromBottom(labelHeight));
     outputMeter.setBounds(outputArea);
-    
-    // True Peak meter
-    auto truePeakArea = bounds.reduced(2);
-    truePeakMeter.setBounds(truePeakArea);
 }
 
 } // namespace SeshEQ

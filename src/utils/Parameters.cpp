@@ -132,11 +132,12 @@ void ParameterLayout::addEQParameters(juce::AudioProcessorValueTreeState::Parame
             static_cast<int>(defaultBandTypes[static_cast<size_t>(i)])
         ));
         
-        // Enable
+        // Enable - Default: Only Band 1 (HPF) and Band 8 (LPF) enabled
+        const bool defaultEnabled = (i == 0 || i == 7);  // Band 1 (HPF) and Band 8 (LPF)
         layout.add(std::make_unique<juce::AudioParameterBool>(
             juce::ParameterID(getBandParamID(i, bandEnable), 1),
             "Band " + bandStr + " Enable",
-            true
+            defaultEnabled
         ));
         
         // Dynamic EQ parameters (per band)
