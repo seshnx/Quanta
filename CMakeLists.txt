@@ -63,7 +63,6 @@ set(PLUGIN_HEADERS
     src/utils/Parameters.h
     src/utils/SmoothValue.h
     src/utils/FFTProcessor.h
-    src/utils/MidSideProcessor.h
     src/utils/PresetManager.h
     src/ui/SpectrumAnalyzer.h
     src/ui/EQCurveDisplay.h

@@ -1,6 +1,10 @@
-# SeshEQ
+# SeshNx Quanta
+
+**Professional Parametric EQ with Integrated Dynamics**
 
 A professional-grade VST3 parametric equalizer with integrated dynamics processing for mixing and mastering.
+
+**Part of the SeshNx Plugin Suite by Amalia Media LLC**
 
 ## Features
 
@@ -62,8 +66,22 @@ See [PLAN.md](PLAN.md) for detailed project planning and architecture documentat
 
 ## License
 
-TBD
+Copyright (c) 2024 Amalia Media LLC. All rights reserved.
+
+Proprietary software - Distribution prohibited without explicit permission.
 
 ---
 
-*SeshEQ - Professional EQ & Dynamics*
+## Version
+
+**v1.0.0**
+
+---
+
+## Support
+
+For technical support, bug reports, or feature requests, please contact the development team through official SeshNx channels.
+
+---
+
+*Part of the [SeshNx Plugin Suite](https://seshnx.com) by Amalia Media LLC - Professional EQ & Dynamics*
