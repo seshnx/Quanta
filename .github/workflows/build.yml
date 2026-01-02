@@ -42,7 +42,7 @@ jobs:
           # Copy AU bundle
           find build -name "*.component" -type d -exec cp -R {} artifacts/macos/ \;
           # Copy Standalone app
-          find build -name "Aura.app" -type d -exec cp -R {} artifacts/macos/ \;
+          find build -name "SeshNx Quanta.app" -type d -exec cp -R {} artifacts/macos/ \;
 
       - name: Upload macOS artifacts
         uses: actions/upload-artifact@v4
@@ -80,7 +80,7 @@ jobs:
             Copy-Item -Path $vst3Path.FullName -Destination artifacts/windows/ -Recurse
           }
           # Find and copy Standalone
-          $exePath = Get-ChildItem -Path build -Filter "SeshNx SeshNxQuanta.exe" -Recurse | Select-Object -First 1
+          $exePath = Get-ChildItem -Path build -Filter "SeshNx Quanta.exe" -Recurse | Select-Object -First 1
           if ($exePath) {
             Copy-Item -Path $exePath.FullName -Destination artifacts/windows/
           }
@@ -142,7 +142,7 @@ jobs:
           # Find and copy VST3
           find build -name "*.vst3" -type d -exec cp -R {} artifacts/linux/ \;
           # Find and copy Standalone
-          find build -type f -name "SeshNx SeshNxQuanta" -executable -exec cp {} artifacts/linux/ \;
+          find build -type f -name "SeshNx_Quanta" -executable -exec cp {} artifacts/linux/ \;
 
       - name: Upload Linux artifacts
         uses: actions/upload-artifact@v4
@@ -167,38 +167,38 @@ jobs:
       - name: Assemble universal VST3 bundle
         run: |
           # Create the universal bundle structure
-          BUNDLE="SeshNxSeshNxQuanta.vst3"
+          BUNDLE="SeshNx_Quanta.vst3"
           mkdir -p "$BUNDLE/Contents/Resources"
 
           # --- macOS binary ---
-          if [ -d "builds/build-macos/SeshNxSeshNxQuanta.vst3/Contents/MacOS" ]; then
+          if [ -d "builds/build-macos/SeshNx_Quanta.vst3/Contents/MacOS" ]; then
             mkdir -p "$BUNDLE/Contents/MacOS"
-            cp -R builds/build-macos/SeshNxSeshNxQuanta.vst3/Contents/MacOS/* "$BUNDLE/Contents/MacOS/"
+            cp -R builds/build-macos/SeshNx_Quanta.vst3/Contents/MacOS/* "$BUNDLE/Contents/MacOS/"
           fi
 
           # Copy Info.plist and PkgInfo from macOS build
-          if [ -f "builds/build-macos/SeshNxSeshNxQuanta.vst3/Contents/Info.plist" ]; then
-            cp builds/build-macos/SeshNxSeshNxQuanta.vst3/Contents/Info.plist "$BUNDLE/Contents/"
+          if [ -f "builds/build-macos/SeshNx_Quanta.vst3/Contents/Info.plist" ]; then
+            cp builds/build-macos/SeshNx_Quanta.vst3/Contents/Info.plist "$BUNDLE/Contents/"
           fi
-          if [ -f "builds/build-macos/SeshNxSeshNxQuanta.vst3/Contents/PkgInfo" ]; then
-            cp builds/build-macos/SeshNxSeshNxQuanta.vst3/Contents/PkgInfo "$BUNDLE/Contents/"
+          if [ -f "builds/build-macos/SeshNx_Quanta.vst3/Contents/PkgInfo" ]; then
+            cp builds/build-macos/SeshNx_Quanta.vst3/Contents/PkgInfo "$BUNDLE/Contents/"
           fi
 
           # Copy Resources from macOS build (moduleinfo.json, etc.)
-          if [ -d "builds/build-macos/SeshNxSeshNxQuanta.vst3/Contents/Resources" ]; then
-            cp -R builds/build-macos/SeshNxSeshNxQuanta.vst3/Contents/Resources/* "$BUNDLE/Contents/Resources/" 2>/dev/null || true
+          if [ -d "builds/build-macos/SeshNx_Quanta.vst3/Contents/Resources" ]; then
+            cp -R builds/build-macos/SeshNx_Quanta.vst3/Contents/Resources/* "$BUNDLE/Contents/Resources/" 2>/dev/null || true
           fi
 
           # --- Windows x86_64 binary ---
-          if [ -d "builds/build-windows/SeshNxSeshNxQuanta.vst3/Contents/x86_64-win" ]; then
+          if [ -d "builds/build-windows/SeshNx_Quanta.vst3/Contents/x86_64-win" ]; then
             mkdir -p "$BUNDLE/Contents/x86_64-win"
-            cp -R builds/build-windows/SeshNxSeshNxQuanta.vst3/Contents/x86_64-win/* "$BUNDLE/Contents/x86_64-win/"
+            cp -R builds/build-windows/SeshNx_Quanta.vst3/Contents/x86_64-win/* "$BUNDLE/Contents/x86_64-win/"
           fi
 
           # --- Linux x86_64 binary ---
-          if [ -d "builds/build-linux/SeshNxSeshNxQuanta.vst3/Contents/x86_64-linux" ]; then
+          if [ -d "builds/build-linux/SeshNx_Quanta.vst3/Contents/x86_64-linux" ]; then
             mkdir -p "$BUNDLE/Contents/x86_64-linux"
-            cp -R builds/build-linux/SeshNxSeshNxQuanta.vst3/Contents/x86_64-linux/* "$BUNDLE/Contents/x86_64-linux/"
+            cp -R builds/build-linux/SeshNx_Quanta.vst3/Contents/x86_64-linux/* "$BUNDLE/Contents/x86_64-linux/"
           fi
 
           # Show final structure
@@ -215,43 +215,43 @@ jobs:
           cp -R "$BUNDLE" output/VST3/
 
           # Copy platform-specific standalones
-          if [ -d "builds/build-macos/Aura.app" ]; then
-            cp -R builds/build-macos/Aura.app output/macOS/
+          if [ -d "builds/build-macos/SeshNx_Quanta.app" ]; then
+            cp -R builds/build-macos/SeshNx_Quanta.app output/macOS/
           fi
-          if [ -d "builds/build-macos/Aura.component" ]; then
-            cp -R builds/build-macos/Aura.component output/macOS/
+          if [ -d "builds/build-macos/SeshNx_Quanta.component" ]; then
+            cp -R builds/build-macos/SeshNx_Quanta.component output/macOS/
           fi
-          if [ -f "builds/build-windows/Aura.exe" ]; then
-            cp builds/build-windows/Aura.exe output/Windows/
+          if [ -f "builds/build-windows/SeshNx Quanta.exe" ]; then
+            cp builds/build-windows/SeshNx\ Quanta.exe output/Windows/
           fi
-          if [ -f "builds/build-linux/Aura" ]; then
-            cp builds/build-linux/Aura output/Linux/
+          if [ -f "builds/build-linux/SeshNx_Quanta" ]; then
+            cp builds/build-linux/SeshNx_Quanta output/Linux/
           fi
 
       - name: Upload Universal VST3 Bundle
         uses: actions/upload-artifact@v4
         with:
-          name: Aura-Universal-VST3
+          name: Quanta-Universal-VST3
           path: output/VST3/
           retention-days: 30
 
       - name: Upload macOS Extras (AU + Standalone)
         uses: actions/upload-artifact@v4
         with:
-          name: Aura-macOS-Extras
+          name: Quanta-macOS-Extras
           path: output/macOS/
           retention-days: 30
 
       - name: Upload Windows Standalone
         uses: actions/upload-artifact@v4
         with:
-          name: Aura-Windows-Standalone
+          name: Quanta-Windows-Standalone
           path: output/Windows/
           retention-days: 30
 
       - name: Upload Linux Standalone
         uses: actions/upload-artifact@v4
         with:
-          name: Aura-Linux-Standalone
+          name: Quanta-Linux-Standalone
           path: output/Linux/
           retention-days: 30
