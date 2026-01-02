@@ -42,7 +42,7 @@ jobs:
           # Copy AU bundle
           find build -name "*.component" -type d -exec cp -R {} artifacts/macos/ \;
           # Copy Standalone app
-          find build -name "SeshNx Quanta.app" -type d -exec cp -R {} artifacts/macos/ \;
+          find build -name "SeshNxQuanta.app" -type d -exec cp -R {} artifacts/macos/ \;
 
       - name: Upload macOS artifacts
         uses: actions/upload-artifact@v4
@@ -142,7 +142,7 @@ jobs:
           # Find and copy VST3
           find build -name "*.vst3" -type d -exec cp -R {} artifacts/linux/ \;
           # Find and copy Standalone
-          find build -type f -name "SeshNx_Quanta" -executable -exec cp {} artifacts/linux/ \;
+          find build -type f -name "SeshNxQuanta" -executable -exec cp {} artifacts/linux/ \;
 
       - name: Upload Linux artifacts
         uses: actions/upload-artifact@v4
@@ -215,17 +215,17 @@ jobs:
           cp -R "$BUNDLE" output/VST3/
 
           # Copy platform-specific standalones
-          if [ -d "builds/build-macos/SeshNx_Quanta.app" ]; then
-            cp -R builds/build-macos/SeshNx_Quanta.app output/macOS/
+          if [ -d "builds/build-macos/SeshNxQuanta.app" ]; then
+            cp -R builds/build-macos/SeshNxQuanta.app output/macOS/
           fi
-          if [ -d "builds/build-macos/SeshNx_Quanta.component" ]; then
-            cp -R builds/build-macos/SeshNx_Quanta.component output/macOS/
+          if [ -d "builds/build-macos/SeshNxQuanta.component" ]; then
+            cp -R builds/build-macos/SeshNxQuanta.component output/macOS/
           fi
           if [ -f "builds/build-windows/SeshNx Quanta.exe" ]; then
             cp builds/build-windows/SeshNx\ Quanta.exe output/Windows/
           fi
-          if [ -f "builds/build-linux/SeshNx_Quanta" ]; then
-            cp builds/build-linux/SeshNx_Quanta output/Linux/
+          if [ -f "builds/build-linux/SeshNxQuanta" ]; then
+            cp builds/build-linux/SeshNxQuanta output/Linux/
           fi
 
       - name: Upload Universal VST3 Bundle
